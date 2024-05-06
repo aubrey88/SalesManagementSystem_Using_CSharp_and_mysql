@@ -49,13 +49,13 @@ namespace DB2_PROJECT
             this.signupbtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.profilepb = new System.Windows.Forms.PictureBox();
             this.passwordtb = new System.Windows.Forms.TextBox();
             this.usernametb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profilepb)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -79,7 +79,7 @@ namespace DB2_PROJECT
             this.groupBox1.Controls.Add(this.signupbtn);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.profilepb);
             this.groupBox1.Controls.Add(this.passwordtb);
             this.groupBox1.Controls.Add(this.usernametb);
             this.groupBox1.Controls.Add(this.label2);
@@ -251,6 +251,7 @@ namespace DB2_PROJECT
             this.signupbtn.TabIndex = 7;
             this.signupbtn.Text = "Create new account";
             this.signupbtn.UseVisualStyleBackColor = true;
+            this.signupbtn.Click += new System.EventHandler(this.signupbtn_Click);
             // 
             // label4
             // 
@@ -273,16 +274,15 @@ namespace DB2_PROJECT
             this.label3.TabIndex = 5;
             this.label3.Text = "SIGN UP FORM";
             // 
-            // pictureBox1
+            // profilepb
             // 
-            this.pictureBox1.Image = global::DB2_PROJECT.Properties.Resource1.images;
-            this.pictureBox1.Location = new System.Drawing.Point(19, 86);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(190, 201);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.profilepb.Location = new System.Drawing.Point(19, 86);
+            this.profilepb.Margin = new System.Windows.Forms.Padding(4);
+            this.profilepb.Name = "profilepb";
+            this.profilepb.Size = new System.Drawing.Size(190, 201);
+            this.profilepb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profilepb.TabIndex = 4;
+            this.profilepb.TabStop = false;
             // 
             // passwordtb
             // 
@@ -334,7 +334,7 @@ namespace DB2_PROJECT
             this.Load += new System.EventHandler(this.SignupForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profilepb)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -361,7 +361,7 @@ namespace DB2_PROJECT
         private System.Windows.Forms.Button signupbtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox profilepb;
         private System.Windows.Forms.TextBox passwordtb;
         private System.Windows.Forms.TextBox usernametb;
         private System.Windows.Forms.Label label2;

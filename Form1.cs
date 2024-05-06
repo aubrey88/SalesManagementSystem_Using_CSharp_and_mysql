@@ -44,49 +44,53 @@ namespace DB2_PROJECT
         private void loginbtn_Click(object sender, EventArgs e)
         {
             string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
-            try { 
-            MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection);
-
-            MySqlConnection.Open();
-
-            string username = usernametb.Text.ToString();
-            string password = passwordtb.Text.ToString();
-
-            if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(password)))
+            try
             {
+                MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection);
+                MySqlConnection.Open();
 
-                MessageBox.Show("No field should be empty!");
-                usernametb.Focus();
-            }
-            else
-            {
-                MySqlCommand newcommand = new MySqlCommand("select * from users", MySqlConnection);
-                MySqlDataReader reader = newcommand.ExecuteReader();
-                while (reader.Read())
+                string username = usernametb.Text;
+                string password = passwordtb.Text;
+
+                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 {
-                    if ((username.Equals(reader.GetString("username"))) && (password.Equals(reader.GetString("userpassword"))))
+                    MessageBox.Show("No field should be empty!");
+                    usernametb.Focus();
+                }
+                else
+                {
+                    bool loginSuccessful = false;
+
+                    MySqlCommand newcommand = new MySqlCommand("SELECT * FROM users", MySqlConnection);
+                    MySqlDataReader reader = newcommand.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        MessageBox.Show("Login successfull");
+                        if (username.Equals(reader.GetString("username")) && password.Equals(reader.GetString("userpassword")))
+                        {
+                            loginSuccessful = true;
+                            break; // Exit the loop once a successful login is found
+                        }
                     }
 
+                    MySqlConnection.Close();
+
+                    if (loginSuccessful)
+                    {
+                        MessageBox.Show("Login successful");
+                    }
                     else
                     {
                         MessageBox.Show("Invalid login, try again!");
                     }
-
                 }
-
-                MySqlConnection.Close();
             }
-
-        }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
-
-     }
-
-
+            }
         }
+
 
         private void signupbtn_Click(object sender, EventArgs e)
         {
