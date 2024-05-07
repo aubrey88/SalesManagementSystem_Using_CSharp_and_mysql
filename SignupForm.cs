@@ -54,7 +54,7 @@ namespace DB2_PROJECT
                 string gender = gendertb.Text.ToString();
                 byte[] profileImage = ImageToByteArray(profilepb.Image);
 
-                if (profilepb.Image == null)
+                if (profilepb.Image == Properties.Resource1.images)
                 {
                     MessageBox.Show("Profile picture cannot be empty!");
                     return;

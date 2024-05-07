@@ -60,24 +60,57 @@ namespace DB2_PROJECT
                 else
                 {
                     bool loginSuccessful = false;
+                    bool isAdmin = false;
 
-                    MySqlCommand newcommand = new MySqlCommand("SELECT * FROM users", MySqlConnection);
-                    MySqlDataReader reader = newcommand.ExecuteReader();
+                    MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username", MySqlConnection);
+                    userCommand.Parameters.AddWithValue("@username", username);
+                    MySqlDataReader userReader = userCommand.ExecuteReader();
 
-                    while (reader.Read())
+                    if (userReader.Read())
                     {
-                        if (username.Equals(reader.GetString("username")) && password.Equals(reader.GetString("userpassword")))
+                        if (password.Equals(userReader.GetString("userpassword")))
                         {
                             loginSuccessful = true;
-                            break; // Exit the loop once a successful login is found
                         }
+                    }
+                    userReader.Close();
+
+                    if (!loginSuccessful)
+                    {
+                        MySqlCommand adminCommand = new MySqlCommand("SELECT * FROM admins WHERE username = @username", MySqlConnection);
+                        adminCommand.Parameters.AddWithValue("@username", username);
+                        MySqlDataReader adminReader = adminCommand.ExecuteReader();
+
+                        if (adminReader.Read())
+                        {
+                            if (password.Equals(adminReader.GetString("password")))
+                            {
+                                loginSuccessful = true;
+                                isAdmin = true;
+                            }
+                        }
+                        adminReader.Close();
                     }
 
                     MySqlConnection.Close();
 
                     if (loginSuccessful)
                     {
-                        MessageBox.Show("Login successful");
+                        if (isAdmin)
+                        {
+                            MessageBox.Show("Login successful, Welcome Admin!");
+                            MainMenu mainForm = new MainMenu();
+                            mainForm.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Login successful");
+
+                            CustomerForm cf = new CustomerForm();
+                            cf.Show();
+                        }
+                        
+                        this.Hide();
                     }
                     else
                     {
@@ -98,8 +131,7 @@ namespace DB2_PROJECT
             f1.Show();
 
 
-            Form1 me = new Form1();
-            me.Close();
+            this.Hide();
 
         }
     }

@@ -276,6 +276,7 @@ namespace DB2_PROJECT
             // 
             // profilepb
             // 
+            this.profilepb.Image = global::DB2_PROJECT.Properties.Resource1.images;
             this.profilepb.Location = new System.Drawing.Point(19, 86);
             this.profilepb.Margin = new System.Windows.Forms.Padding(4);
             this.profilepb.Name = "profilepb";
