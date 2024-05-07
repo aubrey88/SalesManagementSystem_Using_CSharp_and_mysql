@@ -70,8 +70,7 @@ namespace DB2_PROJECT
 
                     if (!loginSuccessful)
                     {
-
-                        MySqlCommand adminCommand = new MySqlCommand("SELECT * FROM admins WHERE username = @username", MySqlConnection);
+                            MySqlCommand adminCommand = new MySqlCommand("SELECT * FROM admins WHERE username = @username", MySqlConnection);
                         adminCommand.Parameters.AddWithValue("@username", username);
                         MySqlDataReader adminReader = adminCommand.ExecuteReader();
 
@@ -129,6 +128,11 @@ namespace DB2_PROJECT
 
 
             this.Hide();
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
         }
     }

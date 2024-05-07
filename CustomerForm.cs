@@ -35,5 +35,11 @@ namespace DB2_PROJECT
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            item itemplay = new item();
+            itemplay.Show();
+        }
     }
 }

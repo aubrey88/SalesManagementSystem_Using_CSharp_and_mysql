@@ -31,22 +31,22 @@ namespace DB2_PROJECT
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.usernamelbl = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.profilepb = new System.Windows.Forms.PictureBox();
-            this.usernamelbl = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilepb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -72,6 +72,15 @@ namespace DB2_PROJECT
             this.groupBox2.Size = new System.Drawing.Size(601, 74);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
+            // 
+            // usernamelbl
+            // 
+            this.usernamelbl.AutoSize = true;
+            this.usernamelbl.Location = new System.Drawing.Point(539, 32);
+            this.usernamelbl.Name = "usernamelbl";
+            this.usernamelbl.Size = new System.Drawing.Size(38, 15);
+            this.usernamelbl.TabIndex = 4;
+            this.usernamelbl.Text = "label1";
             // 
             // button10
             // 
@@ -109,16 +118,6 @@ namespace DB2_PROJECT
             this.button8.Text = "ADD NEW";
             this.button8.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Teal;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 22);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(601, 336);
-            this.dataGridView1.TabIndex = 1;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button4);
@@ -147,6 +146,7 @@ namespace DB2_PROJECT
             this.button2.TabIndex = 2;
             this.button2.Text = "Shop";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -166,14 +166,15 @@ namespace DB2_PROJECT
             this.profilepb.TabIndex = 0;
             this.profilepb.TabStop = false;
             // 
-            // usernamelbl
+            // dataGridView1
             // 
-            this.usernamelbl.AutoSize = true;
-            this.usernamelbl.Location = new System.Drawing.Point(539, 32);
-            this.usernamelbl.Name = "usernamelbl";
-            this.usernamelbl.Size = new System.Drawing.Size(38, 15);
-            this.usernamelbl.TabIndex = 4;
-            this.usernamelbl.Text = "label1";
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.Teal;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(9, 22);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(601, 336);
+            this.dataGridView1.TabIndex = 1;
             // 
             // CustomerForm
             // 
@@ -187,9 +188,9 @@ namespace DB2_PROJECT
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.profilepb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
