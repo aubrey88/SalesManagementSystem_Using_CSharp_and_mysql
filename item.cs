@@ -242,5 +242,53 @@ namespace DB2_PROJECT
             }
         }
 
+        private void deletebtn_Click(object sender, EventArgs e)
+        {
+                if (datav1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select a record to delete.");
+                    return;
+                }
+
+                //find the selected row
+                int itemId = Convert.ToInt32(datav1.SelectedRows[0].Cells["Item ID"].Value);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+               
+            if (result == DialogResult.Yes)
+                {
+                    string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+                    try
+                    {
+                        using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                        {
+                            MySqlConnection.Open();
+                            string query = "DELETE FROM item WHERE item_id = @itemId";
+                            using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                            {
+                                sqlCommand.Parameters.AddWithValue("@itemId", itemId);
+                                int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Item deleted successfully.");
+                                    Clear_all();
+                                    LoadData();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Cannot delete, invalid item ID");
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            
+
+        }
     }
 }
