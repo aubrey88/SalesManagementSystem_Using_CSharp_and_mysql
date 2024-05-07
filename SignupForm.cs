@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 
 namespace DB2_PROJECT
@@ -87,7 +83,7 @@ namespace DB2_PROJECT
                     MessageBox.Show("User created successfully!");
                 }
 
-                 byte[] ImageToByteArray(Image image)
+                byte[] ImageToByteArray(Image image)
                 {
                     using (System.IO.MemoryStream ms = new MemoryStream())
                     {
@@ -104,10 +100,10 @@ namespace DB2_PROJECT
             }
         }
 
-      
-    
 
 
-        }
+
+
     }
+}
 

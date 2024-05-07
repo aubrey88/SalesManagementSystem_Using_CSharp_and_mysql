@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace DB2_PROJECT
 {
@@ -77,6 +70,7 @@ namespace DB2_PROJECT
 
                     if (!loginSuccessful)
                     {
+
                         MySqlCommand adminCommand = new MySqlCommand("SELECT * FROM admins WHERE username = @username", MySqlConnection);
                         adminCommand.Parameters.AddWithValue("@username", username);
                         MySqlDataReader adminReader = adminCommand.ExecuteReader();
@@ -105,11 +99,14 @@ namespace DB2_PROJECT
                         else
                         {
                             MessageBox.Show("Login successful");
+                            string loggedInUsername = usernametb.Text;
 
-                            CustomerForm cf = new CustomerForm();
+
+                            CustomerForm cf = new CustomerForm(loggedInUsername);
+                            cf.LoggedInUsername = loggedInUsername;
                             cf.Show();
                         }
-                        
+
                         this.Hide();
                     }
                     else
