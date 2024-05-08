@@ -29,7 +29,7 @@ namespace DB2_PROJECT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.datav1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.savebtn = new System.Windows.Forms.Button();
@@ -53,8 +53,9 @@ namespace DB2_PROJECT
             this.deletebtn = new System.Windows.Forms.Button();
             this.newbtn = new System.Windows.Forms.Button();
             this.editbtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.searchtb = new System.Windows.Forms.TextBox();
+            this.searchbtn = new System.Windows.Forms.Button();
+            this.sortcmb = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.datav1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,14 +65,14 @@ namespace DB2_PROJECT
             // datav1
             // 
             this.datav1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.datav1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.datav1.DefaultCellStyle = dataGridViewCellStyle4;
             this.datav1.Location = new System.Drawing.Point(12, 81);
             this.datav1.Name = "datav1";
             this.datav1.RowTemplate.Height = 25;
@@ -144,6 +145,7 @@ namespace DB2_PROJECT
             this.categorytb.Name = "categorytb";
             this.categorytb.Size = new System.Drawing.Size(175, 23);
             this.categorytb.TabIndex = 16;
+            this.categorytb.TextChanged += new System.EventHandler(this.categorytb_TextChanged);
             // 
             // label5
             // 
@@ -161,6 +163,7 @@ namespace DB2_PROJECT
             this.brandtb.Name = "brandtb";
             this.brandtb.Size = new System.Drawing.Size(175, 23);
             this.brandtb.TabIndex = 14;
+            this.brandtb.TextChanged += new System.EventHandler(this.brandtb_TextChanged);
             // 
             // label6
             // 
@@ -198,6 +201,7 @@ namespace DB2_PROJECT
             this.quantitytb.Name = "quantitytb";
             this.quantitytb.Size = new System.Drawing.Size(175, 23);
             this.quantitytb.TabIndex = 7;
+            this.quantitytb.TextChanged += new System.EventHandler(this.quantitytb_TextChanged);
             // 
             // label4
             // 
@@ -215,6 +219,7 @@ namespace DB2_PROJECT
             this.costtb.Name = "costtb";
             this.costtb.Size = new System.Drawing.Size(175, 23);
             this.costtb.TabIndex = 5;
+            this.costtb.TextChanged += new System.EventHandler(this.costtb_TextChanged);
             // 
             // label3
             // 
@@ -304,32 +309,58 @@ namespace DB2_PROJECT
             this.editbtn.TabIndex = 0;
             this.editbtn.Text = "Edit Item";
             this.editbtn.UseVisualStyleBackColor = true;
+            this.editbtn.Click += new System.EventHandler(this.editbtn_Click);
             // 
-            // textBox1
+            // searchtb
             // 
-            this.textBox1.Location = new System.Drawing.Point(352, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 23);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "search for an item";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.searchtb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchtb.Location = new System.Drawing.Point(353, 24);
+            this.searchtb.Name = "searchtb";
+            this.searchtb.Size = new System.Drawing.Size(198, 25);
+            this.searchtb.TabIndex = 2;
+            this.searchtb.Text = "search for an item";
+            this.searchtb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.searchtb.TextChanged += new System.EventHandler(this.searchtb_TextChanged);
             // 
-            // button5
+            // searchbtn
             // 
-            this.button5.Location = new System.Drawing.Point(557, 24);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(34, 23);
-            this.button5.TabIndex = 3;
-            this.button5.UseVisualStyleBackColor = true;
+            this.searchbtn.Location = new System.Drawing.Point(557, 24);
+            this.searchbtn.Name = "searchbtn";
+            this.searchbtn.Size = new System.Drawing.Size(34, 25);
+            this.searchbtn.TabIndex = 3;
+            this.searchbtn.UseVisualStyleBackColor = true;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
+            // 
+            // sortcmb
+            // 
+            this.sortcmb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sortcmb.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.sortcmb.FormattingEnabled = true;
+            this.sortcmb.Items.AddRange(new object[] {
+            "Item ID",
+            "Item Name",
+            "Item Brand",
+            "Category",
+            "Cost per item",
+            "Quantity"});
+            this.sortcmb.Location = new System.Drawing.Point(31, 24);
+            this.sortcmb.Name = "sortcmb";
+            this.sortcmb.Size = new System.Drawing.Size(233, 25);
+            this.sortcmb.TabIndex = 4;
+            this.sortcmb.Text = "Sort by";
+            this.sortcmb.SelectedIndexChanged += new System.EventHandler(this.sortcmb_SelectedIndexChanged);
             // 
             // item
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 588);
+            this.Controls.Add(this.sortcmb);
             this.Controls.Add(this.datav1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchbtn);
+            this.Controls.Add(this.searchtb);
             this.Controls.Add(this.groupBox1);
             this.Name = "item";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -353,8 +384,8 @@ namespace DB2_PROJECT
         private System.Windows.Forms.Button deletebtn;
         private System.Windows.Forms.Button newbtn;
         private System.Windows.Forms.Button editbtn;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox searchtb;
+        private System.Windows.Forms.Button searchbtn;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox quantitytb;
         private System.Windows.Forms.Label label4;
@@ -372,5 +403,6 @@ namespace DB2_PROJECT
         private System.Windows.Forms.TextBox brandtb;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button chooseimgbtn;
+        private System.Windows.Forms.ComboBox sortcmb;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -16,6 +17,8 @@ namespace DB2_PROJECT
             InitializeComponent();
             InitializeDataGridView();
             LoadData();
+
+     
         }
 
         private void item_Load(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace DB2_PROJECT
                 using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
                 {
                     MySqlConnection.Open();
-                    string query = "SELECT item_id, item_name, description, item_brand, cost_per_item, quantity, item_image, category_id FROM item";
+                    string query = "SELECT i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_name FROM item i join category c on i.category_id=c.category_id";
 
                     
                     using (MySqlCommand adminCommand = new MySqlCommand(query, MySqlConnection))
@@ -67,11 +70,11 @@ namespace DB2_PROJECT
                             table.Columns.Add("Quantity", typeof(string));
                             
                             table.Columns.Add("Image", typeof(byte[]));
-                            table.Columns.Add("Category", typeof(int));
+                            table.Columns.Add("Category", typeof(string));
 
                             while (adminReader.Read())
                             {
-                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_id"]);
+                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_name"]);
                             }
                             datav1.DataSource = table;
                         }
@@ -92,12 +95,14 @@ namespace DB2_PROJECT
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            //making sure a textbox was modified first.
+            changesMade = true;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
+            //making sure a textbox was modified first.
+            changesMade = true;
         }
 
         private void clear_Click(object sender, EventArgs e)
@@ -188,57 +193,63 @@ namespace DB2_PROJECT
                 MessageBox.Show("Please fill in all fields.");
                 return;
             }
-
-            string itemName = nametb.Text;
-            string description = descriptiontb.Text;
-            string itemBrand = brandtb.Text;
-            decimal costPerItem = decimal.Parse(costtb.Text);
-            int quantity = int.Parse(quantitytb.Text);
-            int categoryId = int.Parse(categorytb.Text);
-            byte[] imageData = null;
-
-            
-            if (itemimagepb.Image != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    itemimagepb.Image.Save(ms, itemimagepb.Image.RawFormat);
-                    imageData = ms.ToArray();
-                }
-            }
-
-            string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
-
             try
             {
-                using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                string itemName = nametb.Text;
+                string description = descriptiontb.Text;
+                string itemBrand = brandtb.Text;
+                decimal costPerItem = decimal.Parse(costtb.Text);
+                int quantity = int.Parse(quantitytb.Text);
+                int categoryId = int.Parse(categorytb.Text);
+                byte[] imageData = null;
+
+
+                if (itemimagepb.Image != null)
                 {
-                    MySqlConnection.Open();
-                    string query = "insert into item(item_name, description, item_brand, cost_per_item, quantity,  item_image, category_id) " +
-                                   "VALUES (@itemName, @description, @itemBrand, @costPerItem, @quantity, @imageData, @categoryId)";
-
-                    using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        sqlCommand.Parameters.AddWithValue("@itemName", itemName);
-                        sqlCommand.Parameters.AddWithValue("@description", description);
-                        sqlCommand.Parameters.AddWithValue("@itemBrand", itemBrand);
-                        sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
-                        sqlCommand.Parameters.AddWithValue("@quantity", quantity);
-                        sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
-                        sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value);
-
-                       
-                        int rowsAffected = sqlCommand.ExecuteNonQuery();
-
-                        MessageBox.Show("New item added successfully.");
-                        Clear_all();
-                        LoadData();
+                        itemimagepb.Image.Save(ms, itemimagepb.Image.RawFormat);
+                        imageData = ms.ToArray();
                     }
+                }
+
+                string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+                try
+                {
+                    using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                    {
+                        MySqlConnection.Open();
+                        string query = "insert into item(item_name, description, item_brand, cost_per_item, quantity,  item_image, category_id) " +
+                                       "VALUES (@itemName, @description, @itemBrand, @costPerItem, @quantity, @imageData, @categoryId)";
+
+                        using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                        {
+                            sqlCommand.Parameters.AddWithValue("@itemName", itemName);
+                            sqlCommand.Parameters.AddWithValue("@description", description);
+                            sqlCommand.Parameters.AddWithValue("@itemBrand", itemBrand);
+                            sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
+                            sqlCommand.Parameters.AddWithValue("@quantity", quantity);
+                            sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                            sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value);
+
+
+                            int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                            MessageBox.Show("New item added successfully.");
+                            Clear_all();
+                            LoadData();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+               MessageBox.Show(ex.Message + "\nPlease make sure the Category field is in integer number! \nCheck category form to know more");
             }
         }
 
@@ -290,5 +301,189 @@ namespace DB2_PROJECT
             
 
         }
+
+        private void searchbtn_Click(object sender, EventArgs e)
+        {
+            string keyword = searchtb.Text.Trim();
+
+          
+            string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+            try
+            {
+                using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                {
+                    MySqlConnection.Open();
+                    string query = @"select i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_name 
+                             from item i join category c ON i.category_id = c.category_id where lower(i.item_name) LIKE (lower(@keyword))";
+
+                  
+                    using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                        DataTable table = new DataTable();
+
+                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            table.Load(reader);
+                        }
+                        datav1.DataSource = table;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching for item: " + ex.Message);
+            }
+        }
+
+        private void searchtb_TextChanged(object sender, EventArgs e)
+        {
+            string a = searchtb.Text.ToString();
+            if (searchtb.Text == "")
+            {
+                LoadData();
+            }
+        }
+
+
+        private void sortcmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //sorting it by using column names to match the cases(string)
+            string selectedoption = sortcmb.SelectedItem.ToString();
+
+            switch (selectedoption)
+            {
+                case "Item ID":
+                    datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
+                    break;
+                case "Item Name":
+                    datav1.Sort(datav1.Columns["Item Name"], ListSortDirection.Ascending);
+                    break;
+                case "Item Brand":
+                    datav1.Sort(datav1.Columns["Item Brand"], ListSortDirection.Ascending);
+                    break;
+                case "Category":
+                    datav1.Sort(datav1.Columns["Category"], ListSortDirection.Ascending);
+                    break;
+                case "Cost per item":
+                    datav1.Sort(datav1.Columns["Cost per item"], ListSortDirection.Ascending);
+                    break;
+                case "Quantity":
+                    datav1.Sort(datav1.Columns["Quantity"], ListSortDirection.Ascending);
+                    break;
+                default:
+                    
+                    datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
+                    break;
+            }
+        }
+
+        private bool changesMade = false;
+
+        
+        private void editbtn_Click(object sender, EventArgs e)
+        {
+            if (datav1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a record to edit.");
+                return;
+            }
+
+            try
+            {
+                if (changesMade)
+                {
+                    int itemId = Convert.ToInt32(datav1.SelectedRows[0].Cells["Item ID"].Value);
+
+
+                    string itemName = nametb.Text;
+                    string description = descriptiontb.Text;
+                    string itemBrand = brandtb.Text;
+                    decimal costPerItem = decimal.Parse(costtb.Text);
+                    int quantity = int.Parse(quantitytb.Text);
+                    int categoryId = int.Parse(categorytb.Text);
+                    byte[] imageData = null;
+
+                    //call update record function
+                    UpdateRecord(itemId, itemName, description, itemBrand, costPerItem, quantity, categoryId, imageData);
+
+                    MessageBox.Show("Record updated successfully.");
+                    changesMade = false;
+                    LoadData();
+                    Clear_all();
+                }
+                else
+                {
+                    MessageBox.Show("No changes were made.");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n Please make sure the Category field is in integer number! \nCheck category form to know more");
+            }
+        }
+
+        
+        private void UpdateRecord(int itemId, string itemName, string description, string itemBrand, decimal costPerItem, int quantity, int categoryId, byte[] imageData)
+        {
+            string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+            try
+            {
+                using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                {
+                    MySqlConnection.Open();
+                    string query = "update item set item_name = @itemName, description = @description, " +
+                                   "item_brand = @itemBrand, cost_per_item = @costPerItem, " +
+                                   "quantity = @quantity, category_id = @categoryId, " +
+                                   "item_image = @imageData WHERE item_id = @itemId";
+
+                    using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@itemId", itemId);
+                        sqlCommand.Parameters.AddWithValue("@itemName", itemName);
+                        sqlCommand.Parameters.AddWithValue("@description", description);
+                        sqlCommand.Parameters.AddWithValue("@itemBrand", itemBrand);
+                        sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
+                        sqlCommand.Parameters.AddWithValue("@quantity", quantity);
+                        sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                        sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value); // Use DBNull.Value if imageData is null
+
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating record: " + ex.Message);
+            }
+        }
+
+        private void costtb_TextChanged(object sender, EventArgs e)
+        {
+            //making sure a textbox was modified first.
+            changesMade = true;
+        }
+
+        private void quantitytb_TextChanged(object sender, EventArgs e)
+        {
+            //making sure a textbox was modified first.
+            changesMade = true;
+        }
+
+        private void brandtb_TextChanged(object sender, EventArgs e)
+        {
+            //making sure a textbox was modified first.
+            changesMade = true;
+        }
+
+        private void categorytb_TextChanged(object sender, EventArgs e)
+        {
+            //making sure a textbox was modified first.
+            changesMade = true;
+        }
     }
+
 }
