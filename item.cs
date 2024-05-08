@@ -353,30 +353,38 @@ namespace DB2_PROJECT
             //sorting it by using column names to match the cases(string)
             string selectedoption = sortcmb.SelectedItem.ToString();
 
-            switch (selectedoption)
+
+            try
             {
-                case "Item ID":
-                    datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
-                    break;
-                case "Item Name":
-                    datav1.Sort(datav1.Columns["Item Name"], ListSortDirection.Ascending);
-                    break;
-                case "Item Brand":
-                    datav1.Sort(datav1.Columns["Item Brand"], ListSortDirection.Ascending);
-                    break;
-                case "Category":
-                    datav1.Sort(datav1.Columns["Category"], ListSortDirection.Ascending);
-                    break;
-                case "Cost per item":
-                    datav1.Sort(datav1.Columns["Cost per item"], ListSortDirection.Ascending);
-                    break;
-                case "Quantity":
-                    datav1.Sort(datav1.Columns["Quantity"], ListSortDirection.Ascending);
-                    break;
-                default:
-                    
-                    datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
-                    break;
+                switch (selectedoption)
+                {
+                    case "Item ID":
+                        datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
+                        break;
+                    case "Item Name":
+                        datav1.Sort(datav1.Columns["Item Name"], ListSortDirection.Ascending);
+                        break;
+                    case "Item Brand":
+                        datav1.Sort(datav1.Columns["Item Brand"], ListSortDirection.Ascending);
+                        break;
+                    case "Category":
+                        datav1.Sort(datav1.Columns["Category"], ListSortDirection.Ascending);
+                        break;
+                    case "Cost per item":
+                        datav1.Sort(datav1.Columns["Cost per item"], ListSortDirection.Ascending);
+                        break;
+                    case "Quantity":
+                        datav1.Sort(datav1.Columns["Quantity"], ListSortDirection.Ascending);
+                        break;
+                    default:
+
+                        datav1.Sort(datav1.Columns["Item ID"], ListSortDirection.Ascending);
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message+ "\nRecord is null");
             }
         }
 
@@ -483,6 +491,13 @@ namespace DB2_PROJECT
         {
             //making sure a textbox was modified first.
             changesMade = true;
+        }
+
+        private void categorybtn_Click(object sender, EventArgs e)
+        {
+            Category newcat = new Category();
+            newcat.Show();
+            this.Hide();
         }
     }
 

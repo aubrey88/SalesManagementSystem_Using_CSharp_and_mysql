@@ -31,11 +31,9 @@ namespace DB2_PROJECT
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.addresslbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.usernamelbl = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -62,61 +60,42 @@ namespace DB2_PROJECT
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.addresslbl);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.usernamelbl);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.button9);
-            this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Location = new System.Drawing.Point(9, 364);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(601, 74);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
+            // addresslbl
+            // 
+            this.addresslbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addresslbl.Location = new System.Drawing.Point(203, 24);
+            this.addresslbl.Name = "addresslbl";
+            this.addresslbl.Size = new System.Drawing.Size(195, 26);
+            this.addresslbl.TabIndex = 6;
+            this.addresslbl.Text = "Address";
+            this.addresslbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Welcome:";
+            // 
             // usernamelbl
             // 
             this.usernamelbl.AutoSize = true;
-            this.usernamelbl.Location = new System.Drawing.Point(539, 32);
+            this.usernamelbl.Location = new System.Drawing.Point(90, 32);
             this.usernamelbl.Name = "usernamelbl";
             this.usernamelbl.Size = new System.Drawing.Size(38, 15);
             this.usernamelbl.TabIndex = 4;
             this.usernamelbl.Text = "label1";
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(442, 23);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(91, 33);
-            this.button10.TabIndex = 3;
-            this.button10.Text = "CLEAR";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(320, 23);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(91, 33);
-            this.button11.TabIndex = 2;
-            this.button11.Text = "DELETE";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(197, 23);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(91, 33);
-            this.button9.TabIndex = 1;
-            this.button9.Text = "UPDATE";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(75, 23);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(91, 33);
-            this.button8.TabIndex = 0;
-            this.button8.Text = "ADD NEW";
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -199,10 +178,6 @@ namespace DB2_PROJECT
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button4;
@@ -210,5 +185,7 @@ namespace DB2_PROJECT
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox profilepb;
         public System.Windows.Forms.Label usernamelbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label addresslbl;
     }
 }

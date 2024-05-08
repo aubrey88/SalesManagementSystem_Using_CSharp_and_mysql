@@ -29,10 +29,10 @@ namespace DB2_PROJECT
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.datav1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.savebtn = new System.Windows.Forms.Button();
+            this.categorybtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.categorytb = new System.Windows.Forms.TextBox();
@@ -65,14 +65,14 @@ namespace DB2_PROJECT
             // datav1
             // 
             this.datav1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.datav1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.datav1.DefaultCellStyle = dataGridViewCellStyle1;
             this.datav1.Location = new System.Drawing.Point(12, 81);
             this.datav1.Name = "datav1";
             this.datav1.RowTemplate.Height = 25;
@@ -82,7 +82,7 @@ namespace DB2_PROJECT
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.savebtn);
+            this.groupBox1.Controls.Add(this.categorybtn);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.clear);
             this.groupBox1.Controls.Add(this.deletebtn);
@@ -95,15 +95,18 @@ namespace DB2_PROJECT
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Modifications";
             // 
-            // savebtn
+            // categorybtn
             // 
-            this.savebtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.savebtn.Location = new System.Drawing.Point(21, 413);
-            this.savebtn.Name = "savebtn";
-            this.savebtn.Size = new System.Drawing.Size(121, 43);
-            this.savebtn.TabIndex = 5;
-            this.savebtn.Text = "Save";
-            this.savebtn.UseVisualStyleBackColor = true;
+            this.categorybtn.BackColor = System.Drawing.Color.Teal;
+            this.categorybtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.categorybtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.categorybtn.Location = new System.Drawing.Point(21, 491);
+            this.categorybtn.Name = "categorybtn";
+            this.categorybtn.Size = new System.Drawing.Size(121, 43);
+            this.categorybtn.TabIndex = 5;
+            this.categorybtn.Text = "View categories";
+            this.categorybtn.UseVisualStyleBackColor = false;
+            this.categorybtn.Click += new System.EventHandler(this.categorybtn_Click);
             // 
             // groupBox2
             // 
@@ -177,6 +180,7 @@ namespace DB2_PROJECT
             // 
             // chooseimgbtn
             // 
+            this.chooseimgbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chooseimgbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chooseimgbtn.Location = new System.Drawing.Point(229, 312);
             this.chooseimgbtn.Name = "chooseimgbtn";
@@ -269,8 +273,9 @@ namespace DB2_PROJECT
             // 
             // clear
             // 
+            this.clear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.clear.Location = new System.Drawing.Point(21, 476);
+            this.clear.Location = new System.Drawing.Point(21, 355);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(121, 43);
             this.clear.TabIndex = 3;
@@ -280,6 +285,7 @@ namespace DB2_PROJECT
             // 
             // deletebtn
             // 
+            this.deletebtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deletebtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.deletebtn.Location = new System.Drawing.Point(21, 282);
             this.deletebtn.Name = "deletebtn";
@@ -291,6 +297,7 @@ namespace DB2_PROJECT
             // 
             // newbtn
             // 
+            this.newbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.newbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.newbtn.Location = new System.Drawing.Point(21, 209);
             this.newbtn.Name = "newbtn";
@@ -302,6 +309,7 @@ namespace DB2_PROJECT
             // 
             // editbtn
             // 
+            this.editbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.editbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.editbtn.Location = new System.Drawing.Point(21, 138);
             this.editbtn.Name = "editbtn";
@@ -324,6 +332,11 @@ namespace DB2_PROJECT
             // 
             // searchbtn
             // 
+            this.searchbtn.BackgroundImage = global::DB2_PROJECT.Properties.Resource1.search1;
+            this.searchbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.searchbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.searchbtn.Image = global::DB2_PROJECT.Properties.Resource1.search;
+            this.searchbtn.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.searchbtn.Location = new System.Drawing.Point(557, 24);
             this.searchbtn.Name = "searchbtn";
             this.searchbtn.Size = new System.Drawing.Size(34, 25);
@@ -396,7 +409,7 @@ namespace DB2_PROJECT
         private System.Windows.Forms.TextBox nametb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox itemimagepb;
-        private System.Windows.Forms.Button savebtn;
+        private System.Windows.Forms.Button categorybtn;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox categorytb;
         private System.Windows.Forms.Label label5;
