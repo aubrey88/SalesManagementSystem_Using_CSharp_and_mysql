@@ -497,7 +497,7 @@ namespace DB2_PROJECT
         {
             Category newcat = new Category();
             newcat.Show();
-            this.Hide();
+      
         }
     }
 
