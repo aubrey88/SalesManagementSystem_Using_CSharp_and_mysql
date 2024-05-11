@@ -35,16 +35,32 @@ namespace DB2_PROJECT
                 {
                     MySqlConnection.Open();
 
-                    MySqlCommand userCommand = new MySqlCommand("SELECT address, profileimage FROM users WHERE username = @username", MySqlConnection);
+                    MySqlCommand userCommand = new MySqlCommand("SELECT concat(first_name,' ' ,last_name) as full_name,  address, date_created, email, phone_number, profileimage FROM users WHERE username = @username", MySqlConnection);
                     userCommand.Parameters.AddWithValue("@username", loggedInUsername);
                     MySqlDataReader userReader = userCommand.ExecuteReader();
 
                     if (userReader.Read())
                     {
+                        usernamelbl.Text = loggedInUsername;
+
                         string address = userReader.GetString("address");
                         addresslbl.Text = address;
 
-                        // Display user's profile image if available
+                        string firstname = userReader.GetString("full_name");
+                        fullnamelbl.Text = firstname;
+
+                        string phonenum = userReader.GetString("phone_number");
+                        phonelbl.Text = phonenum;
+
+                        string email = userReader.GetString("email");
+                        emaillbl.Text = email;
+
+                        DateTime datecreated = userReader.GetDateTime("date_created");
+                        string conv = Convert.ToString(datecreated);
+                        datecreatedlbl.Text = conv;
+
+
+                        //show image if user has image
                         if (!userReader.IsDBNull(userReader.GetOrdinal("profileimage")))
                         {
                             byte[] imageData = (byte[])userReader["profileimage"];
@@ -71,11 +87,42 @@ namespace DB2_PROJECT
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+           
 
 
         }
-                
 
+        private void profilepb_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editpanel_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+
+
+       
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editprofilebtn_Click_1(object sender, EventArgs e)
+        {
+
+            editform openeditform = new editform(loggedInUsername);
+            openeditform.Show();
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CustomerForm customerForm = new CustomerForm(loggedInUsername);
+            customerForm.Show();
+        }
     }
 
 }

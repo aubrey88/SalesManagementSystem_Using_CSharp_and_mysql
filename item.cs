@@ -418,9 +418,23 @@ namespace DB2_PROJECT
                     decimal costPerItem = decimal.Parse(costtb.Text);
                     int quantity = int.Parse(quantitytb.Text);
                     int categoryId = int.Parse(categoryidtb.Text);
-                    byte[] imageData = null;
 
-                    if (string.IsNullOrEmpty(nametb.Text) ||
+
+                    Image profileImage = itemimagepb.Image;
+                    if (profileImage != null)
+                    {
+
+                        byte[] imageData = ImageToByteArray(profileImage);
+
+
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            itemimagepb.Image = Image.FromStream(ms);
+                        }
+
+
+
+                        if (string.IsNullOrEmpty(nametb.Text) ||
              string.IsNullOrEmpty(descriptiontb.Text) ||
              string.IsNullOrEmpty(brandtb.Text) ||
              string.IsNullOrEmpty(costtb.Text) ||
@@ -428,21 +442,26 @@ namespace DB2_PROJECT
              string.IsNullOrEmpty(categorytb.Text) ||
              string.IsNullOrEmpty(categoryidtb.Text))
 
-                    {
-                        MessageBox.Show("Please fill in all fields.");
-                        return;
-                    }
-                    //call update record function
-                    UpdateRecord(itemId, itemName, description, itemBrand, costPerItem, quantity, categoryId, imageData);
+                        {
+                            MessageBox.Show("Please fill in all fields.");
+                            return;
+                        }
+                        //call update record function
+                        UpdateRecord(itemId, itemName, description, itemBrand, costPerItem, quantity, categoryId, imageData);
 
-                    MessageBox.Show("Record updated successfully.");
-                    changesMade = false;
-                    LoadData();
-                    Clear_all();
+                        MessageBox.Show("Record updated successfully.");
+                        changesMade = false;
+                        LoadData();
+                        Clear_all();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No changes were made.");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("No changes were made.");
+                    MessageBox.Show("No image selected");
                 }
             }
             catch(Exception ex)
@@ -518,7 +537,22 @@ namespace DB2_PROJECT
       
         }
 
+        private byte[] ImageToByteArray(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                return ms.ToArray();
+            }
+        }
+
+
         private void datav1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void item_FormClosing(object sender, FormClosingEventArgs e)
         {
 
         }

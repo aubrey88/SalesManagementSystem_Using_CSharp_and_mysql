@@ -1,6 +1,4 @@
-﻿// CustomerForm.cs
-
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -25,7 +23,7 @@ namespace DB2_PROJECT
 
         private void CustomerForm_Load(object sender, EventArgs e)
         {
-            // Fetch user's address and profile image from the database
+         
             FetchUserData();
         }
 
@@ -48,7 +46,7 @@ namespace DB2_PROJECT
                         string address = userReader.GetString("address");
                         addresslbl.Text = address;
 
-                        // Display user's profile image if available
+
                         if (!userReader.IsDBNull(userReader.GetOrdinal("profileimage")))
                         {
                             byte[] imageData = (byte[])userReader["profileimage"];

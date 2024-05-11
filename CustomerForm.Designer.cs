@@ -162,6 +162,7 @@ namespace DB2_PROJECT
             this.ClientSize = new System.Drawing.Size(904, 451);
             this.Controls.Add(this.groupBox1);
             this.Name = "CustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CustomerForm";
             this.Load += new System.EventHandler(this.CustomerForm_Load);
             this.groupBox1.ResumeLayout(false);

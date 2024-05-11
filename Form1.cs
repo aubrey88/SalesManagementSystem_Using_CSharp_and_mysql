@@ -101,7 +101,7 @@ namespace DB2_PROJECT
 
                             CustomerForm customerForm = new CustomerForm(username);
                             customerForm.Show();
-                            this.Hide();
+                            
                             return;
 
                         }
@@ -132,6 +132,20 @@ namespace DB2_PROJECT
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

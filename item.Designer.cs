@@ -401,6 +401,7 @@ namespace DB2_PROJECT
             this.Name = "item";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "item";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.item_FormClosing);
             this.Load += new System.EventHandler(this.item_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datav1)).EndInit();
             this.groupBox1.ResumeLayout(false);

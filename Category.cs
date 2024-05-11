@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace DB2_PROJECT
@@ -26,10 +23,10 @@ namespace DB2_PROJECT
             this.datav1.AllowUserToAddRows = false;
             this.datav1.AllowUserToDeleteRows = false;
             this.datav1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datav1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; 
+            this.datav1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //this.datav1.Dock = DockStyle.Fill;
             this.datav1.ReadOnly = true;
-            this.datav1.RowTemplate.Height = 120;
+            this.datav1.RowTemplate.Height = 130;
             this.Controls.Add(this.datav1);
             ((System.ComponentModel.ISupportInitialize)(this.datav1)).EndInit();
             this.ResumeLayout(false);
@@ -78,7 +75,7 @@ namespace DB2_PROJECT
         {
 
 
-       
+
         }
 
 
@@ -86,14 +83,10 @@ namespace DB2_PROJECT
         {
             categorynametb.Text = "";
             categoryidtb.Text = "";
-            
+
 
         }
 
-        private void datav1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void newbtn_Click_1(object sender, EventArgs e)
         {
@@ -160,18 +153,18 @@ namespace DB2_PROJECT
                     categorynametb.Text = selectedRow.Cells["Category Name"].Value.ToString();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-          
+
 
         }
 
         private void clear_Click(object sender, EventArgs e)
         {
             Clear_all();
-            
+
         }
 
         private void searchbtn_Click(object sender, EventArgs e)
@@ -309,9 +302,9 @@ namespace DB2_PROJECT
                     int catID = Convert.ToInt32(datav1.SelectedRows[0].Cells["Category ID"].Value);
 
 
-                    string categoyID = categoryidtb.Text;
+                    // string categoyID = categoryidtb.Text;
                     string catName = categorynametb.Text;
-                   
+
 
                     if (string.IsNullOrEmpty(categoryidtb.Text) ||
              string.IsNullOrEmpty(categoryidtb.Text))
@@ -339,7 +332,7 @@ namespace DB2_PROJECT
             }
         }
 
-        private void UpdateRecord(int itemId, string itemName)
+        private void UpdateRecord(int catID, string catName)
         {
             string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
 
@@ -352,9 +345,9 @@ namespace DB2_PROJECT
 
                     using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
                     {
-                        sqlCommand.Parameters.AddWithValue("@catId", itemId);
-                        sqlCommand.Parameters.AddWithValue("@catName", itemName);
-          
+                        sqlCommand.Parameters.AddWithValue("@catId", catID);
+                        sqlCommand.Parameters.AddWithValue("@catName", catName);
+
                         sqlCommand.ExecuteNonQuery();
                     }
                 }
@@ -375,7 +368,7 @@ namespace DB2_PROJECT
         {
             //making sure a textbox was modified first.
             changesMade = true;
-           // categoryidtb.Enabled = false;
+            
         }
 
         private void searchtb_TextChanged_1(object sender, EventArgs e)
