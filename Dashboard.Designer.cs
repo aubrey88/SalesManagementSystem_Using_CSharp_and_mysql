@@ -32,7 +32,6 @@ namespace DB2_PROJECT
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.usernamelbl = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.emaillbl = new System.Windows.Forms.Label();
             this.datecreatedlbl = new System.Windows.Forms.Label();
@@ -75,21 +74,11 @@ namespace DB2_PROJECT
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Location = new System.Drawing.Point(268, 116);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(474, 263);
             this.panel2.TabIndex = 5;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(252, 40);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(173, 158);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
             // 
             // groupBox2
             // 
@@ -145,7 +134,7 @@ namespace DB2_PROJECT
             // addresslbl
             // 
             this.addresslbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addresslbl.Location = new System.Drawing.Point(17, 266);
+            this.addresslbl.Location = new System.Drawing.Point(17, 273);
             this.addresslbl.Name = "addresslbl";
             this.addresslbl.Size = new System.Drawing.Size(195, 26);
             this.addresslbl.TabIndex = 3;
@@ -155,7 +144,7 @@ namespace DB2_PROJECT
             // phonelbl
             // 
             this.phonelbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.phonelbl.Location = new System.Drawing.Point(17, 224);
+            this.phonelbl.Location = new System.Drawing.Point(17, 230);
             this.phonelbl.Name = "phonelbl";
             this.phonelbl.Size = new System.Drawing.Size(195, 26);
             this.phonelbl.TabIndex = 2;
@@ -192,7 +181,7 @@ namespace DB2_PROJECT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 393);
+            this.ClientSize = new System.Drawing.Size(800, 418);
             this.Controls.Add(this.groupBox1);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -213,7 +202,6 @@ namespace DB2_PROJECT
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label usernamelbl;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label emaillbl;
         private System.Windows.Forms.Label datecreatedlbl;

@@ -37,7 +37,7 @@ namespace DB2_PROJECT
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dashboardbtn = new System.Windows.Forms.Button();
             this.profilepb = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
@@ -101,7 +101,7 @@ namespace DB2_PROJECT
             // 
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.dashboardbtn);
             this.panel1.Controls.Add(this.profilepb);
             this.panel1.Location = new System.Drawing.Point(628, 22);
             this.panel1.Name = "panel1";
@@ -127,15 +127,15 @@ namespace DB2_PROJECT
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // dashboardbtn
             // 
-            this.button1.Location = new System.Drawing.Point(49, 162);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(165, 66);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Dashboard";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dashboardbtn.Location = new System.Drawing.Point(49, 162);
+            this.dashboardbtn.Name = "dashboardbtn";
+            this.dashboardbtn.Size = new System.Drawing.Size(165, 66);
+            this.dashboardbtn.TabIndex = 1;
+            this.dashboardbtn.Text = "Dashboard";
+            this.dashboardbtn.UseVisualStyleBackColor = true;
+            this.dashboardbtn.Click += new System.EventHandler(this.dashboardbtn_Click);
             // 
             // profilepb
             // 
@@ -182,7 +182,7 @@ namespace DB2_PROJECT
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button dashboardbtn;
         private System.Windows.Forms.PictureBox profilepb;
         public System.Windows.Forms.Label usernamelbl;
         private System.Windows.Forms.Label label1;

@@ -1,12 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DB2_PROJECT
 {
     public partial class Dashboard : Form
     {
-        private object loggedInUsername;
+
+        private string loggedInUsername;
 
         public Dashboard()
         {
@@ -14,44 +17,64 @@ namespace DB2_PROJECT
         }
 
 
-
-
-        private void Dashboard_Load(object sender, EventArgs e)
+        public Dashboard(string username)
         {
+            InitializeComponent();
+            loggedInUsername = username;
             
-            string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+            FetchUserData();
+        }
+
+        private void FetchUserData()
+        {
+            string mySqlConnection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
             try
-            { 
-
-
-                string loggedInUsename = usernamelbl.Text;
-            MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection);
-                MySqlConnection.Open();
-
-                MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username", MySqlConnection);
-                userCommand.Parameters.AddWithValue("@username", loggedInUsername);
-                MySqlDataReader userReader = userCommand.ExecuteReader();
-
-                if (userReader.Read())
+            {
+                using (MySqlConnection MySqlConnection = new MySqlConnection(mySqlConnection))
                 {
-                    string loggedInUsername = userReader.GetString("username");
-                    string email = userReader.GetString("email");
-                    string fullName = userReader.GetString("full_name");
+                    MySqlConnection.Open();
 
-                    // Display user information in appropriate controls
-                    usernamelbl.Text = loggedInUsername;
-                    emaillbl.Text = email;
-                    fullnamelbl.Text = fullName;
+                    MySqlCommand userCommand = new MySqlCommand("SELECT address, profileimage FROM users WHERE username = @username", MySqlConnection);
+                    userCommand.Parameters.AddWithValue("@username", loggedInUsername);
+                    MySqlDataReader userReader = userCommand.ExecuteReader();
+
+                    if (userReader.Read())
+                    {
+                        string address = userReader.GetString("address");
+                        addresslbl.Text = address;
+
+                        // Display user's profile image if available
+                        if (!userReader.IsDBNull(userReader.GetOrdinal("profileimage")))
+                        {
+                            byte[] imageData = (byte[])userReader["profileimage"];
+                            profilepb.Image = Image.FromStream(new MemoryStream(imageData));
+                        }
+                        else
+                        {
+                            profilepb.Image = null;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("User not found!");
+                    }
+
+                    userReader.Close();
                 }
-
-                userReader.Close();
-                MySqlConnection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+
+
+        }
+                
 
     }
 

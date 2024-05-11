@@ -98,15 +98,13 @@ namespace DB2_PROJECT
                         else
                         {
                             MessageBox.Show("Login successful");
-                            string loggedInUsername = usernametb.Text;
 
+                            CustomerForm customerForm = new CustomerForm(username);
+                            customerForm.Show();
+                            this.Hide();
+                            return;
 
-                            CustomerForm cf = new CustomerForm(loggedInUsername);
-                            cf.LoggedInUsername = loggedInUsername;
-                            cf.Show();
                         }
-
-                        this.Hide();
                     }
                     else
                     {
