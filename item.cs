@@ -52,7 +52,7 @@ namespace DB2_PROJECT
                 using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
                 {
                     MySqlConnection.Open();
-                    string query = "SELECT i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_name FROM item i join category c on i.category_id=c.category_id";
+                    string query = "SELECT i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_id, c.category_name FROM item i join category c on i.category_id=c.category_id";
 
                     
                     using (MySqlCommand adminCommand = new MySqlCommand(query, MySqlConnection))
@@ -70,11 +70,12 @@ namespace DB2_PROJECT
                             table.Columns.Add("Quantity", typeof(string));
                             
                             table.Columns.Add("Image", typeof(byte[]));
-                            table.Columns.Add("Category", typeof(string));
+                            table.Columns.Add("Category ID", typeof(int));
+                            table.Columns.Add("Category Name", typeof(string));
 
                             while (adminReader.Read())
                             {
-                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_name"]);
+                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_id"], adminReader["category_name"]);
                             }
                             datav1.DataSource = table;
                         }
@@ -113,6 +114,7 @@ namespace DB2_PROJECT
         public void Clear_all()
         {
             categorytb.Text = "";
+            categoryidtb.Text = "";
             brandtb.Text = "";
             nametb.Text = "";
             costtb.Text = "";
@@ -156,8 +158,9 @@ namespace DB2_PROJECT
                 //select row to display it
                 DataGridViewRow selectedRow = datav1.SelectedRows[0];
 
-             
-                categorytb.Text = selectedRow.Cells["Category"].Value.ToString();
+
+                categoryidtb.Text = selectedRow.Cells["Category ID"].Value.ToString();
+                categorytb.Text = selectedRow.Cells["Category Name"].Value.ToString();
                 brandtb.Text = selectedRow.Cells["Item brand"].Value.ToString();
                 nametb.Text = selectedRow.Cells["Item Name"].Value.ToString();
                 costtb.Text = selectedRow.Cells["Cost per item"].Value.ToString();
@@ -188,7 +191,9 @@ namespace DB2_PROJECT
                 string.IsNullOrEmpty(brandtb.Text) ||
                 string.IsNullOrEmpty(costtb.Text) ||
                 string.IsNullOrEmpty(quantitytb.Text) ||
-                string.IsNullOrEmpty(categorytb.Text))
+                string.IsNullOrEmpty(categorytb.Text) ||
+                string.IsNullOrEmpty(categoryidtb.Text))
+
             {
                 MessageBox.Show("Please fill in all fields.");
                 return;
@@ -200,7 +205,8 @@ namespace DB2_PROJECT
                 string itemBrand = brandtb.Text;
                 decimal costPerItem = decimal.Parse(costtb.Text);
                 int quantity = int.Parse(quantitytb.Text);
-                int categoryId = int.Parse(categorytb.Text);
+                int categoryId = int.Parse(categoryidtb.Text);
+                string categoryName = categorytb.Text;
                 byte[] imageData = null;
 
 
@@ -384,7 +390,7 @@ namespace DB2_PROJECT
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message+ "\nRecord is null");
+                MessageBox.Show(ex.Message+ "\nSearch box must be cleared!");
             }
         }
 
@@ -411,9 +417,21 @@ namespace DB2_PROJECT
                     string itemBrand = brandtb.Text;
                     decimal costPerItem = decimal.Parse(costtb.Text);
                     int quantity = int.Parse(quantitytb.Text);
-                    int categoryId = int.Parse(categorytb.Text);
+                    int categoryId = int.Parse(categoryidtb.Text);
                     byte[] imageData = null;
 
+                    if (string.IsNullOrEmpty(nametb.Text) ||
+             string.IsNullOrEmpty(descriptiontb.Text) ||
+             string.IsNullOrEmpty(brandtb.Text) ||
+             string.IsNullOrEmpty(costtb.Text) ||
+             string.IsNullOrEmpty(quantitytb.Text) ||
+             string.IsNullOrEmpty(categorytb.Text) ||
+             string.IsNullOrEmpty(categoryidtb.Text))
+
+                    {
+                        MessageBox.Show("Please fill in all fields.");
+                        return;
+                    }
                     //call update record function
                     UpdateRecord(itemId, itemName, description, itemBrand, costPerItem, quantity, categoryId, imageData);
 
@@ -498,6 +516,11 @@ namespace DB2_PROJECT
             Category newcat = new Category();
             newcat.Show();
       
+        }
+
+        private void datav1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

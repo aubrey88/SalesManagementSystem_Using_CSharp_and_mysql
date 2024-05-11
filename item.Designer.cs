@@ -34,6 +34,8 @@ namespace DB2_PROJECT
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.categorybtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.categoryidtb = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.categorytb = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -78,6 +80,7 @@ namespace DB2_PROJECT
             this.datav1.RowTemplate.Height = 25;
             this.datav1.Size = new System.Drawing.Size(756, 495);
             this.datav1.TabIndex = 0;
+            this.datav1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datav1_CellContentClick);
             this.datav1.SelectionChanged += new System.EventHandler(this.datav1_SelectionChanged);
             // 
             // groupBox1
@@ -110,6 +113,8 @@ namespace DB2_PROJECT
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.categoryidtb);
+            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.categorytb);
             this.groupBox2.Controls.Add(this.label5);
@@ -132,6 +137,23 @@ namespace DB2_PROJECT
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // categoryidtb
+            // 
+            this.categoryidtb.Location = new System.Drawing.Point(21, 450);
+            this.categoryidtb.Name = "categoryidtb";
+            this.categoryidtb.Size = new System.Drawing.Size(175, 23);
+            this.categoryidtb.TabIndex = 19;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(205, 413);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 21);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Category Name:";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -144,7 +166,8 @@ namespace DB2_PROJECT
             // 
             // categorytb
             // 
-            this.categorytb.Location = new System.Drawing.Point(21, 442);
+            this.categorytb.Enabled = false;
+            this.categorytb.Location = new System.Drawing.Point(205, 450);
             this.categorytb.Name = "categorytb";
             this.categorytb.Size = new System.Drawing.Size(175, 23);
             this.categorytb.TabIndex = 16;
@@ -156,9 +179,9 @@ namespace DB2_PROJECT
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(21, 413);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 21);
+            this.label5.Size = new System.Drawing.Size(95, 21);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Category:";
+            this.label5.Text = "Category ID:";
             // 
             // brandtb
             // 
@@ -417,5 +440,7 @@ namespace DB2_PROJECT
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button chooseimgbtn;
         private System.Windows.Forms.ComboBox sortcmb;
+        private System.Windows.Forms.TextBox categoryidtb;
+        private System.Windows.Forms.Label label8;
     }
 }
