@@ -125,7 +125,7 @@ namespace DB2_PROJECT
             this.groupBox2.Size = new System.Drawing.Size(173, 158);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Orders";
             // 
             // emaillbl
             // 

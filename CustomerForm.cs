@@ -76,8 +76,11 @@ namespace DB2_PROJECT
         private void button2_Click(object sender, EventArgs e)
         {
          
-            item itemForm = new item();
-            itemForm.Show();
+            // item itemForm = new item();
+           // itemForm.Show();
+           
+            customeritempage customershopform = new customeritempage(loggedInUsername);
+            customershopform.Show();
         }
 
         private void dashboardbtn_Click(object sender, EventArgs e)

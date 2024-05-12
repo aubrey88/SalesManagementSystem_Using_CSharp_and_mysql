@@ -556,6 +556,69 @@ namespace DB2_PROJECT
         {
 
         }
+
+        private void orderitembtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string itemName = nametb.Text;
+                string description = descriptiontb.Text;
+                string itemBrand = brandtb.Text;
+                decimal costPerItem = decimal.Parse(costtb.Text);
+                int quantity = int.Parse(quantitytb.Text);
+                int categoryId = int.Parse(categoryidtb.Text);
+                string categoryName = categorytb.Text;
+                byte[] imageData = null;
+
+
+                if (itemimagepb.Image != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        itemimagepb.Image.Save(ms, itemimagepb.Image.RawFormat);
+                        imageData = ms.ToArray();
+                    }
+                }
+
+                string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+                try
+                {
+                    using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                    {
+                        MySqlConnection.Open();
+                        string query = "insert into item(item_name, description, item_brand, cost_per_item, quantity,  item_image, category_id) " +
+                                       "VALUES (@itemName, @description, @itemBrand, @costPerItem, @quantity, @imageData, @categoryId)";
+
+                        using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                        {
+                            sqlCommand.Parameters.AddWithValue("@itemName", itemName);
+                            sqlCommand.Parameters.AddWithValue("@description", description);
+                            sqlCommand.Parameters.AddWithValue("@itemBrand", itemBrand);
+                            sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
+                            sqlCommand.Parameters.AddWithValue("@quantity", quantity);
+                            sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                            sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value);
+
+
+                            int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                            MessageBox.Show("New item added successfully.");
+                            Clear_all();
+                            LoadData();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nPlease make sure the Category field is in integer number! \nCheck category form to know more");
+            }
+        }
     }
 
 }

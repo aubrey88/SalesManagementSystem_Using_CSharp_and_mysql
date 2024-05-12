@@ -72,7 +72,7 @@ namespace DB2_PROJECT
             // addresslbl
             // 
             this.addresslbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addresslbl.Location = new System.Drawing.Point(203, 24);
+            this.addresslbl.Location = new System.Drawing.Point(379, 29);
             this.addresslbl.Name = "addresslbl";
             this.addresslbl.Size = new System.Drawing.Size(195, 26);
             this.addresslbl.TabIndex = 6;
@@ -91,9 +91,10 @@ namespace DB2_PROJECT
             // usernamelbl
             // 
             this.usernamelbl.AutoSize = true;
-            this.usernamelbl.Location = new System.Drawing.Point(90, 32);
+            this.usernamelbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.usernamelbl.Location = new System.Drawing.Point(90, 29);
             this.usernamelbl.Name = "usernamelbl";
-            this.usernamelbl.Size = new System.Drawing.Size(38, 15);
+            this.usernamelbl.Size = new System.Drawing.Size(57, 21);
             this.usernamelbl.TabIndex = 4;
             this.usernamelbl.Text = "label1";
             // 
@@ -103,9 +104,9 @@ namespace DB2_PROJECT
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.dashboardbtn);
             this.panel1.Controls.Add(this.profilepb);
-            this.panel1.Location = new System.Drawing.Point(628, 22);
+            this.panel1.Location = new System.Drawing.Point(616, 22);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 416);
+            this.panel1.Size = new System.Drawing.Size(267, 416);
             this.panel1.TabIndex = 0;
             // 
             // button4
@@ -129,7 +130,7 @@ namespace DB2_PROJECT
             // 
             // dashboardbtn
             // 
-            this.dashboardbtn.Location = new System.Drawing.Point(49, 162);
+            this.dashboardbtn.Location = new System.Drawing.Point(49, 165);
             this.dashboardbtn.Name = "dashboardbtn";
             this.dashboardbtn.Size = new System.Drawing.Size(165, 66);
             this.dashboardbtn.TabIndex = 1;
@@ -139,9 +140,10 @@ namespace DB2_PROJECT
             // 
             // profilepb
             // 
-            this.profilepb.Location = new System.Drawing.Point(49, 17);
+            this.profilepb.Location = new System.Drawing.Point(8, 8);
             this.profilepb.Name = "profilepb";
-            this.profilepb.Size = new System.Drawing.Size(165, 119);
+            this.profilepb.Size = new System.Drawing.Size(249, 148);
+            this.profilepb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.profilepb.TabIndex = 0;
             this.profilepb.TabStop = false;
             // 
