@@ -92,8 +92,11 @@ namespace DB2_PROJECT
                         if (isAdmin)
                         {
                             MessageBox.Show("Login successful, Welcome Admin!");
+                            
                             MainMenu mainForm = new MainMenu();
                             mainForm.Show();
+                            this.Hide();
+                          
                         }
                         else
                         {
@@ -101,7 +104,8 @@ namespace DB2_PROJECT
 
                             CustomerForm customerForm = new CustomerForm(username);
                             customerForm.Show();
-                            
+                            this.Hide();
+                    
                             return;
 
                         }
@@ -136,16 +140,9 @@ namespace DB2_PROJECT
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
+          
                 Application.Exit();
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            
         }
     }
 }

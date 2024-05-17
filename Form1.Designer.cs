@@ -76,6 +76,7 @@ namespace DB2_PROJECT
             this.passwordtb.Location = new System.Drawing.Point(233, 197);
             this.passwordtb.Margin = new System.Windows.Forms.Padding(4);
             this.passwordtb.Name = "passwordtb";
+            this.passwordtb.PasswordChar = '*';
             this.passwordtb.Size = new System.Drawing.Size(184, 29);
             this.passwordtb.TabIndex = 3;
             // 

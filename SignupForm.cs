@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -22,8 +23,7 @@ namespace DB2_PROJECT
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            SignupForm f1 = new SignupForm();
-            f1.Close();
+            this.Hide();
 
 
             Form1 me = new Form1();
@@ -50,48 +50,61 @@ namespace DB2_PROJECT
                 string gender = gendertb.Text.ToString();
                 byte[] profileImage = ImageToByteArray(profilepb.Image);
 
-                if (profilepb.Image == Properties.Resource1.images)
+                if (profilepb.Image == null)
                 {
                     MessageBox.Show("Profile picture cannot be empty!");
                     return;
                 }
 
-                if ((String.IsNullOrEmpty(username)) || (profilepb.Image == null) || (String.IsNullOrEmpty(address)) || (String.IsNullOrEmpty(gender)) || (String.IsNullOrEmpty(phonenumber)) || (String.IsNullOrEmpty(dob)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(last_name)) || (String.IsNullOrEmpty(first_name)) || (String.IsNullOrEmpty(email)))
+                if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(address)) || (String.IsNullOrEmpty(gender)) || (String.IsNullOrEmpty(phonenumber)) || (String.IsNullOrEmpty(dob)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(last_name)) || (String.IsNullOrEmpty(first_name)) || ((profilepb.Image==Properties.Resource1.images)) || (String.IsNullOrEmpty(email)))
                 {
-
                     MessageBox.Show("No field should be empty!");
                     usernametb.Focus();
                 }
                 else
                 {
-                    string query = "INSERT INTO users (first_name, last_name, date_of_birth, gender, address, email, phone_number, username, userpassword, profileimage) VALUES (@first_name, @last_name, @dob, @gender, @address, @email, @phone_number, @username, @password, @profile)";
+                    //directly calling the procedures
+                    using (MySqlCommand cmd = new MySqlCommand("insert_user", MySqlConnection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    MySqlCommand cmd = new MySqlCommand(query, MySqlConnection);
-                    cmd.Parameters.AddWithValue("@first_name", first_name);
-                    cmd.Parameters.AddWithValue("@last_name", last_name);
-                    cmd.Parameters.AddWithValue("@dob", dob);
-                    cmd.Parameters.AddWithValue("@gender", gender);
-                    cmd.Parameters.AddWithValue("@address", address);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@phone_number", phonenumber);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@profile", profileImage);
+                        cmd.Parameters.AddWithValue("@p_first_name", first_name);
+                        cmd.Parameters.AddWithValue("@p_last_name", last_name);
+                        cmd.Parameters.AddWithValue("@p_gender", gender);
+                        cmd.Parameters.AddWithValue("@p_date_of_birth", dob);
+                        cmd.Parameters.AddWithValue("@p_address", address);
+                        cmd.Parameters.AddWithValue("@p_email", email);
+                        cmd.Parameters.AddWithValue("@p_phone_number", phonenumber);
+                        cmd.Parameters.AddWithValue("@p_profileimage", profileImage);
+                        cmd.Parameters.AddWithValue("@p_username", username);
+                        cmd.Parameters.AddWithValue("@p_userpassword", password);
 
-                    cmd.ExecuteNonQuery();
+                        
+                        cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("User created successfully!");
+                        //using (MySqlCommand cmdCustomer = new MySqlCommand("insert_customer", MySqlConnection))
+                        //{
+                        //    cmdCustomer.CommandType = CommandType.StoredProcedure;
+                        //    cmdCustomer.ExecuteNonQuery();
+                        //}
+
+                        MessageBox.Show("Your account has been created successfully!");
+                        clearall();
+                    }
                 }
 
                 byte[] ImageToByteArray(Image image)
                 {
+                    if (image == null)
+                    {
+                        return null;
+                    }
+
                     using (System.IO.MemoryStream ms = new MemoryStream())
                     {
                         image.Save(ms, ImageFormat.Jpeg);
                         return ms.ToArray();
                     }
-
-
                 }
             }
             catch (Exception ex)
@@ -100,10 +113,40 @@ namespace DB2_PROJECT
             }
         }
 
+        private void clearall()
+        {
+            usernametb.Text = "";
+            passwordtb.Text = "";
+            profilepb.Image = null;
+            firstnametb.Text = "";
+            lastnametb.Text = "";
+            gendertb.Text = "";
+            dobtb.Text = "";
+            addresstb.Text = "";
+            emailtb.Text = "";
+            phonetb.Text = "";
+        }
 
+        private void chooseimagebtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            DialogResult result = openFileDialog.ShowDialog();
 
-
-
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+                    profilepb.Image = Image.FromFile(selectedFilePath);
+                    profilepb.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading image: " + ex.Message);
+                }
+            }
+        }
     }
 }
 

@@ -56,9 +56,10 @@ namespace DB2_PROJECT
             this.nametb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.categorybtn = new System.Windows.Forms.Button();
-            this.orderitembtn = new System.Windows.Forms.Button();
+            this.addtocartbtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.datav1 = new System.Windows.Forms.DataGridView();
+            this.cartbtn = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemimagepb)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -356,22 +357,22 @@ namespace DB2_PROJECT
             this.categorybtn.UseVisualStyleBackColor = false;
             this.categorybtn.Click += new System.EventHandler(this.categorybtn_Click);
             // 
-            // orderitembtn
+            // addtocartbtn
             // 
-            this.orderitembtn.BackColor = System.Drawing.Color.Teal;
-            this.orderitembtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.orderitembtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.orderitembtn.Location = new System.Drawing.Point(21, 435);
-            this.orderitembtn.Name = "orderitembtn";
-            this.orderitembtn.Size = new System.Drawing.Size(121, 43);
-            this.orderitembtn.TabIndex = 6;
-            this.orderitembtn.Text = "Order item";
-            this.orderitembtn.UseVisualStyleBackColor = false;
-            this.orderitembtn.Click += new System.EventHandler(this.orderitembtn_Click);
+            this.addtocartbtn.BackColor = System.Drawing.Color.Teal;
+            this.addtocartbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addtocartbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addtocartbtn.Location = new System.Drawing.Point(21, 435);
+            this.addtocartbtn.Name = "addtocartbtn";
+            this.addtocartbtn.Size = new System.Drawing.Size(121, 43);
+            this.addtocartbtn.TabIndex = 6;
+            this.addtocartbtn.Text = "Add to cart";
+            this.addtocartbtn.UseVisualStyleBackColor = false;
+            this.addtocartbtn.Click += new System.EventHandler(this.orderitembtn_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.orderitembtn);
+            this.groupBox1.Controls.Add(this.addtocartbtn);
             this.groupBox1.Controls.Add(this.categorybtn);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.clear);
@@ -404,11 +405,22 @@ namespace DB2_PROJECT
             this.datav1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datav1_CellContentClick);
             this.datav1.SelectionChanged += new System.EventHandler(this.datav1_SelectionChanged);
             // 
+            // cartbtn
+            // 
+            this.cartbtn.BackgroundImage = global::DB2_PROJECT.Properties.Resource1.carticon;
+            this.cartbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cartbtn.Location = new System.Drawing.Point(678, 23);
+            this.cartbtn.Name = "cartbtn";
+            this.cartbtn.Size = new System.Drawing.Size(90, 52);
+            this.cartbtn.TabIndex = 20;
+            this.cartbtn.UseVisualStyleBackColor = true;
+            // 
             // item
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1366, 588);
+            this.Controls.Add(this.cartbtn);
             this.Controls.Add(this.sortcmb);
             this.Controls.Add(this.datav1);
             this.Controls.Add(this.searchbtn);
@@ -457,8 +469,9 @@ namespace DB2_PROJECT
         private System.Windows.Forms.TextBox nametb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button categorybtn;
-        private System.Windows.Forms.Button orderitembtn;
+        private System.Windows.Forms.Button addtocartbtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView datav1;
+        private System.Windows.Forms.Button cartbtn;
     }
 }

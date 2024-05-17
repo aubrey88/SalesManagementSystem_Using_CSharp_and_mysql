@@ -84,11 +84,12 @@ namespace DB2_PROJECT
             this.groupBox1.Controls.Add(this.usernametb);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 7);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(867, 421);
+            this.groupBox1.Size = new System.Drawing.Size(893, 435);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -102,6 +103,7 @@ namespace DB2_PROJECT
             this.chooseimagebtn.TabIndex = 23;
             this.chooseimagebtn.Text = "Choose Image";
             this.chooseimagebtn.UseVisualStyleBackColor = true;
+            this.chooseimagebtn.Click += new System.EventHandler(this.chooseimagebtn_Click);
             // 
             // addresstb
             // 
@@ -276,7 +278,8 @@ namespace DB2_PROJECT
             // 
             // profilepb
             // 
-            this.profilepb.Image = global::DB2_PROJECT.Properties.Resource1.images;
+            this.profilepb.BackColor = System.Drawing.Color.DarkGoldenrod;
+            this.profilepb.InitialImage = null;
             this.profilepb.Location = new System.Drawing.Point(19, 86);
             this.profilepb.Margin = new System.Windows.Forms.Padding(4);
             this.profilepb.Name = "profilepb";
