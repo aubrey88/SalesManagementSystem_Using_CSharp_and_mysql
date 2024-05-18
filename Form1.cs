@@ -54,8 +54,9 @@ namespace DB2_PROJECT
                 {
                     bool loginSuccessful = false;
                     bool isAdmin = false;
+                    bool isSupplier = false;
 
-                    MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username", MySqlConnection);
+                    MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username and role = lower('customer')", MySqlConnection);
                     userCommand.Parameters.AddWithValue("@username", username);
                     MySqlDataReader userReader = userCommand.ExecuteReader();
 
@@ -84,6 +85,22 @@ namespace DB2_PROJECT
                         }
                         adminReader.Close();
                     }
+                    if (!loginSuccessful && !isAdmin)
+                    {
+                        MySqlCommand supplierCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username AND role = 'supplier'", MySqlConnection);
+                        supplierCommand.Parameters.AddWithValue("@username", username);
+                        MySqlDataReader supplierReader = supplierCommand.ExecuteReader();
+
+                        if (supplierReader.Read())
+                        {
+                            if (password.Equals(supplierReader.GetString("userpassword")))
+                            {
+                                loginSuccessful = true;
+                                isSupplier = true;
+                            }
+                        }
+                        supplierReader.Close();
+                    }
 
                     MySqlConnection.Close();
 
@@ -96,7 +113,17 @@ namespace DB2_PROJECT
                             MainMenu mainForm = new MainMenu();
                             mainForm.Show();
                             this.Hide();
+                            usernametb.Text = "";
+                            passwordtb.Text = "";
                           
+                        }
+
+                        else if (isSupplier)
+                        {
+                            MessageBox.Show("Login successful, Welcome "+ username + "!");
+                            SupplierForm supplierForm = new SupplierForm();
+                            supplierForm.Show();
+                            this.Hide();
                         }
                         else
                         {
@@ -104,8 +131,12 @@ namespace DB2_PROJECT
 
                             CustomerForm customerForm = new CustomerForm(username);
                             customerForm.Show();
+                            
+                            usernametb.Text = "";
+                            passwordtb.Text = "";
                             this.Hide();
-                    
+
+
                             return;
 
                         }
@@ -128,6 +159,9 @@ namespace DB2_PROJECT
             SignupForm f1 = new SignupForm();
             f1.Show();
 
+
+            usernametb.Text = "";
+            passwordtb.Text = "";
 
             this.Hide();
 

@@ -63,6 +63,7 @@ namespace DB2_PROJECT
                 }
                 else
                 {
+                    string crole = "customer";
                     //directly calling the procedures
                     using (MySqlCommand cmd = new MySqlCommand("insert_user", MySqlConnection))
                     {
@@ -78,8 +79,8 @@ namespace DB2_PROJECT
                         cmd.Parameters.AddWithValue("@p_profileimage", profileImage);
                         cmd.Parameters.AddWithValue("@p_username", username);
                         cmd.Parameters.AddWithValue("@p_userpassword", password);
+                        cmd.Parameters.AddWithValue("@p_role", crole);
 
-                        
                         cmd.ExecuteNonQuery();
 
                         //using (MySqlCommand cmdCustomer = new MySqlCommand("insert_customer", MySqlConnection))

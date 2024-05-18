@@ -38,6 +38,10 @@ namespace DB2_PROJECT
             this.deletebtn = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.suppliertb = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.itemidtb = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.categoryidtb = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,7 +60,7 @@ namespace DB2_PROJECT
             this.nametb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.categorybtn = new System.Windows.Forms.Button();
-            this.addtocartbtn = new System.Windows.Forms.Button();
+            this.adminaddtocartbtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.datav1 = new System.Windows.Forms.DataGridView();
             this.cartbtn = new System.Windows.Forms.Button();
@@ -82,7 +86,7 @@ namespace DB2_PROJECT
             "Quantity"});
             this.sortcmb.Location = new System.Drawing.Point(31, 24);
             this.sortcmb.Name = "sortcmb";
-            this.sortcmb.Size = new System.Drawing.Size(233, 25);
+            this.sortcmb.Size = new System.Drawing.Size(237, 25);
             this.sortcmb.TabIndex = 4;
             this.sortcmb.Text = "Sort by";
             this.sortcmb.SelectedIndexChanged += new System.EventHandler(this.sortcmb_SelectedIndexChanged);
@@ -162,6 +166,10 @@ namespace DB2_PROJECT
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.suppliertb);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.itemidtb);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.categoryidtb);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label7);
@@ -186,9 +194,44 @@ namespace DB2_PROJECT
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // suppliertb
+            // 
+            this.suppliertb.Location = new System.Drawing.Point(206, 427);
+            this.suppliertb.Name = "suppliertb";
+            this.suppliertb.Size = new System.Drawing.Size(175, 23);
+            this.suppliertb.TabIndex = 23;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(206, 398);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(90, 21);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Supplier ID:";
+            // 
+            // itemidtb
+            // 
+            this.itemidtb.Enabled = false;
+            this.itemidtb.Location = new System.Drawing.Point(22, 57);
+            this.itemidtb.Name = "itemidtb";
+            this.itemidtb.Size = new System.Drawing.Size(175, 23);
+            this.itemidtb.TabIndex = 21;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(22, 28);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 21);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Item ID:";
+            // 
             // categoryidtb
             // 
-            this.categoryidtb.Location = new System.Drawing.Point(21, 450);
+            this.categoryidtb.Location = new System.Drawing.Point(22, 504);
             this.categoryidtb.Name = "categoryidtb";
             this.categoryidtb.Size = new System.Drawing.Size(175, 23);
             this.categoryidtb.TabIndex = 19;
@@ -197,7 +240,7 @@ namespace DB2_PROJECT
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(205, 413);
+            this.label8.Location = new System.Drawing.Point(206, 467);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(122, 21);
             this.label8.TabIndex = 18;
@@ -207,7 +250,7 @@ namespace DB2_PROJECT
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(229, 146);
+            this.label7.Location = new System.Drawing.Point(240, 99);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 21);
             this.label7.TabIndex = 17;
@@ -216,7 +259,7 @@ namespace DB2_PROJECT
             // categorytb
             // 
             this.categorytb.Enabled = false;
-            this.categorytb.Location = new System.Drawing.Point(205, 450);
+            this.categorytb.Location = new System.Drawing.Point(206, 504);
             this.categorytb.Name = "categorytb";
             this.categorytb.Size = new System.Drawing.Size(175, 23);
             this.categorytb.TabIndex = 16;
@@ -226,7 +269,7 @@ namespace DB2_PROJECT
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(21, 413);
+            this.label5.Location = new System.Drawing.Point(22, 467);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(95, 21);
             this.label5.TabIndex = 15;
@@ -234,7 +277,7 @@ namespace DB2_PROJECT
             // 
             // brandtb
             // 
-            this.brandtb.Location = new System.Drawing.Point(21, 373);
+            this.brandtb.Location = new System.Drawing.Point(22, 427);
             this.brandtb.Name = "brandtb";
             this.brandtb.Size = new System.Drawing.Size(175, 23);
             this.brandtb.TabIndex = 14;
@@ -244,7 +287,7 @@ namespace DB2_PROJECT
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(21, 344);
+            this.label6.Location = new System.Drawing.Point(22, 398);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 21);
             this.label6.TabIndex = 13;
@@ -254,9 +297,9 @@ namespace DB2_PROJECT
             // 
             this.chooseimgbtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chooseimgbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.chooseimgbtn.Location = new System.Drawing.Point(229, 312);
+            this.chooseimgbtn.Location = new System.Drawing.Point(206, 264);
             this.chooseimgbtn.Name = "chooseimgbtn";
-            this.chooseimgbtn.Size = new System.Drawing.Size(134, 32);
+            this.chooseimgbtn.Size = new System.Drawing.Size(175, 32);
             this.chooseimgbtn.TabIndex = 5;
             this.chooseimgbtn.Text = "Choose image";
             this.chooseimgbtn.UseVisualStyleBackColor = true;
@@ -265,16 +308,16 @@ namespace DB2_PROJECT
             // itemimagepb
             // 
             this.itemimagepb.BackColor = System.Drawing.Color.RosyBrown;
-            this.itemimagepb.Location = new System.Drawing.Point(229, 177);
+            this.itemimagepb.Location = new System.Drawing.Point(206, 129);
             this.itemimagepb.Name = "itemimagepb";
-            this.itemimagepb.Size = new System.Drawing.Size(134, 129);
+            this.itemimagepb.Size = new System.Drawing.Size(175, 129);
             this.itemimagepb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.itemimagepb.TabIndex = 8;
             this.itemimagepb.TabStop = false;
             // 
             // quantitytb
             // 
-            this.quantitytb.Location = new System.Drawing.Point(21, 300);
+            this.quantitytb.Location = new System.Drawing.Point(22, 354);
             this.quantitytb.Name = "quantitytb";
             this.quantitytb.Size = new System.Drawing.Size(175, 23);
             this.quantitytb.TabIndex = 7;
@@ -284,7 +327,7 @@ namespace DB2_PROJECT
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(21, 271);
+            this.label4.Location = new System.Drawing.Point(22, 325);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 21);
             this.label4.TabIndex = 6;
@@ -292,7 +335,7 @@ namespace DB2_PROJECT
             // 
             // costtb
             // 
-            this.costtb.Location = new System.Drawing.Point(21, 227);
+            this.costtb.Location = new System.Drawing.Point(22, 281);
             this.costtb.Name = "costtb";
             this.costtb.Size = new System.Drawing.Size(175, 23);
             this.costtb.TabIndex = 5;
@@ -302,7 +345,7 @@ namespace DB2_PROJECT
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(21, 198);
+            this.label3.Location = new System.Drawing.Point(22, 252);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 21);
             this.label3.TabIndex = 4;
@@ -310,7 +353,7 @@ namespace DB2_PROJECT
             // 
             // descriptiontb
             // 
-            this.descriptiontb.Location = new System.Drawing.Point(21, 146);
+            this.descriptiontb.Location = new System.Drawing.Point(22, 200);
             this.descriptiontb.Name = "descriptiontb";
             this.descriptiontb.Size = new System.Drawing.Size(175, 23);
             this.descriptiontb.TabIndex = 3;
@@ -320,7 +363,7 @@ namespace DB2_PROJECT
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(21, 117);
+            this.label2.Location = new System.Drawing.Point(22, 171);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 21);
             this.label2.TabIndex = 2;
@@ -328,7 +371,7 @@ namespace DB2_PROJECT
             // 
             // nametb
             // 
-            this.nametb.Location = new System.Drawing.Point(21, 76);
+            this.nametb.Location = new System.Drawing.Point(22, 129);
             this.nametb.Name = "nametb";
             this.nametb.Size = new System.Drawing.Size(175, 23);
             this.nametb.TabIndex = 1;
@@ -338,7 +381,7 @@ namespace DB2_PROJECT
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(21, 47);
+            this.label1.Location = new System.Drawing.Point(22, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 21);
             this.label1.TabIndex = 0;
@@ -357,22 +400,22 @@ namespace DB2_PROJECT
             this.categorybtn.UseVisualStyleBackColor = false;
             this.categorybtn.Click += new System.EventHandler(this.categorybtn_Click);
             // 
-            // addtocartbtn
+            // adminaddtocartbtn
             // 
-            this.addtocartbtn.BackColor = System.Drawing.Color.Teal;
-            this.addtocartbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addtocartbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addtocartbtn.Location = new System.Drawing.Point(21, 435);
-            this.addtocartbtn.Name = "addtocartbtn";
-            this.addtocartbtn.Size = new System.Drawing.Size(121, 43);
-            this.addtocartbtn.TabIndex = 6;
-            this.addtocartbtn.Text = "Add to cart";
-            this.addtocartbtn.UseVisualStyleBackColor = false;
-            this.addtocartbtn.Click += new System.EventHandler(this.orderitembtn_Click);
+            this.adminaddtocartbtn.BackColor = System.Drawing.Color.Teal;
+            this.adminaddtocartbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.adminaddtocartbtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.adminaddtocartbtn.Location = new System.Drawing.Point(21, 435);
+            this.adminaddtocartbtn.Name = "adminaddtocartbtn";
+            this.adminaddtocartbtn.Size = new System.Drawing.Size(121, 43);
+            this.adminaddtocartbtn.TabIndex = 6;
+            this.adminaddtocartbtn.Text = "Add to cart";
+            this.adminaddtocartbtn.UseVisualStyleBackColor = false;
+            this.adminaddtocartbtn.Click += new System.EventHandler(this.adminaddtocartbtn_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.addtocartbtn);
+            this.groupBox1.Controls.Add(this.adminaddtocartbtn);
             this.groupBox1.Controls.Add(this.categorybtn);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.clear);
@@ -419,7 +462,7 @@ namespace DB2_PROJECT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 588);
+            this.ClientSize = new System.Drawing.Size(1370, 588);
             this.Controls.Add(this.cartbtn);
             this.Controls.Add(this.sortcmb);
             this.Controls.Add(this.datav1);
@@ -469,9 +512,13 @@ namespace DB2_PROJECT
         private System.Windows.Forms.TextBox nametb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button categorybtn;
-        private System.Windows.Forms.Button addtocartbtn;
+        private System.Windows.Forms.Button adminaddtocartbtn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView datav1;
         private System.Windows.Forms.Button cartbtn;
+        private System.Windows.Forms.TextBox itemidtb;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox suppliertb;
+        private System.Windows.Forms.Label label10;
     }
 }

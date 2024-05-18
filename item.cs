@@ -52,7 +52,7 @@ namespace DB2_PROJECT
                 using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
                 {
                     MySqlConnection.Open();
-                    string query = "SELECT i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_id, c.category_name FROM item i join category c on i.category_id=c.category_id";
+                    string query = "SELECT i.item_id, i.item_name, i.description, i.item_brand, i.cost_per_item, i.quantity, i.item_image, c.category_id, c.category_name, i.supplier_id FROM item i join supplier s on i.supplier_id= s.supplier_id join category c on i.category_id=c.category_id";
 
                     
                     using (MySqlCommand adminCommand = new MySqlCommand(query, MySqlConnection))
@@ -73,9 +73,10 @@ namespace DB2_PROJECT
                             table.Columns.Add("Category ID", typeof(int));
                             table.Columns.Add("Category Name", typeof(string));
 
+                            table.Columns.Add("Supplier ID", typeof(int));
                             while (adminReader.Read())
                             {
-                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_id"], adminReader["category_name"]);
+                                table.Rows.Add(adminReader["item_id"], adminReader["item_name"], adminReader["description"], adminReader["item_brand"], adminReader["cost_per_item"], adminReader["quantity"], adminReader["item_image"], adminReader["category_id"], adminReader["category_name"], adminReader["supplier_id"]);
                             }
                             datav1.DataSource = table;
                         }
@@ -120,6 +121,7 @@ namespace DB2_PROJECT
             costtb.Text = "";
             quantitytb.Text = "";
             descriptiontb.Text = "";
+            itemidtb.Text = "";
             itemimagepb.Image = null;
 
         }
@@ -161,13 +163,15 @@ namespace DB2_PROJECT
 
                 categoryidtb.Text = selectedRow.Cells["Category ID"].Value.ToString();
                 categorytb.Text = selectedRow.Cells["Category Name"].Value.ToString();
+                itemidtb.Text = selectedRow.Cells["Item ID"].Value.ToString();
                 brandtb.Text = selectedRow.Cells["Item brand"].Value.ToString();
                 nametb.Text = selectedRow.Cells["Item Name"].Value.ToString();
                 costtb.Text = selectedRow.Cells["Cost per item"].Value.ToString();
                 quantitytb.Text = selectedRow.Cells["Quantity"].Value.ToString();
                 descriptiontb.Text = selectedRow.Cells["Description"].Value.ToString();
+                suppliertb.Text = selectedRow.Cells["Supplier ID"].Value.ToString();
 
-              
+
                 if (selectedRow.Cells["Image"].Value != DBNull.Value)
                 {
                     //get the image row 
@@ -191,7 +195,7 @@ namespace DB2_PROJECT
                 string.IsNullOrEmpty(brandtb.Text) ||
                 string.IsNullOrEmpty(costtb.Text) ||
                 string.IsNullOrEmpty(quantitytb.Text) ||
-                string.IsNullOrEmpty(categorytb.Text) ||
+               
                 string.IsNullOrEmpty(categoryidtb.Text))
 
             {
@@ -208,6 +212,7 @@ namespace DB2_PROJECT
                 int categoryId = int.Parse(categoryidtb.Text);
                 string categoryName = categorytb.Text;
                 byte[] imageData = null;
+                string supplierID = suppliertb.Text;
 
 
                 if (itemimagepb.Image != null)
@@ -226,8 +231,8 @@ namespace DB2_PROJECT
                     using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
                     {
                         MySqlConnection.Open();
-                        string query = "insert into item(item_name, description, item_brand, cost_per_item, quantity,  item_image, category_id) " +
-                                       "VALUES (@itemName, @description, @itemBrand, @costPerItem, @quantity, @imageData, @categoryId)";
+                        string query = "insert into item(item_name, description, item_brand, cost_per_item, quantity,  item_image, category_id,supplier_id) " +
+                                       "VALUES (@itemName, @description, @itemBrand, @costPerItem, @quantity, @imageData, @categoryId, @supplierID)";
 
                         using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
                         {
@@ -237,6 +242,7 @@ namespace DB2_PROJECT
                             sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
                             sqlCommand.Parameters.AddWithValue("@quantity", quantity);
                             sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
+                            sqlCommand.Parameters.AddWithValue("@supplierID", supplierID);
                             sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value);
 
 
@@ -557,7 +563,7 @@ namespace DB2_PROJECT
 
         }
 
-        private void orderitembtn_Click(object sender, EventArgs e)
+        private void adminaddtocartbtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -594,16 +600,12 @@ namespace DB2_PROJECT
                         {
                             sqlCommand.Parameters.AddWithValue("@itemName", itemName);
                             sqlCommand.Parameters.AddWithValue("@description", description);
-                            sqlCommand.Parameters.AddWithValue("@itemBrand", itemBrand);
-                            sqlCommand.Parameters.AddWithValue("@costPerItem", costPerItem);
-                            sqlCommand.Parameters.AddWithValue("@quantity", quantity);
-                            sqlCommand.Parameters.AddWithValue("@categoryId", categoryId);
-                            sqlCommand.Parameters.AddWithValue("@imageData", (object)imageData ?? DBNull.Value);
+
 
 
                             int rowsAffected = sqlCommand.ExecuteNonQuery();
 
-                            MessageBox.Show("New item added successfully.");
+                            MessageBox.Show("Order added successfully.");
                             Clear_all();
                             LoadData();
                         }
@@ -618,7 +620,8 @@ namespace DB2_PROJECT
             {
                 MessageBox.Show(ex.Message + "\nPlease make sure the Category field is in integer number! \nCheck category form to know more");
             }
-        }
+        
+    }
     }
 
 }
