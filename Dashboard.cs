@@ -113,7 +113,7 @@ namespace DB2_PROJECT
 
         private void editprofilebtn_Click_1(object sender, EventArgs e)
         {
-
+            this.Hide();
             editform openeditform = new editform(loggedInUsername);
             openeditform.Show();
         }

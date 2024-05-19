@@ -59,7 +59,11 @@ namespace DB2_PROJECT
                 using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
                 {
                     MySqlConnection.Open();
-                    string query = "select p.payment_id, p.payment_date, p.payment_amount, payment_status, p.item_quantity_taken, o.order_id, o.customerid, concat(u.first_name, '', u.last_name) as Customer_Name  from payment p join orders o on p.order_id = o.order_id join customer c on o.customerid=c.customer_id join users u on c.user_id = u.user_id order by p.payment_amount desc";
+                    string query = "select p.payment_id, p.payment_date, p.payment_amount, payment_status, " +
+                        "p.item_quantity_taken, o.order_id, o.customerid, concat(u.first_name, ' ', u.last_name) " +
+                        "as Customer_Name  from payment p join orders o on p.order_id = o.order_id " +
+                        "join customer c on o.customerid=c.customer_id join users u on c.user_id = u.user_id " +
+                        "order by p.payment_amount desc";
 
  
                     using (MySqlCommand adminCommand = new MySqlCommand(query, MySqlConnection))

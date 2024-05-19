@@ -216,6 +216,7 @@ namespace DB2_PROJECT
             this.profilepb.Location = new System.Drawing.Point(17, 18);
             this.profilepb.Name = "profilepb";
             this.profilepb.Size = new System.Drawing.Size(269, 167);
+            this.profilepb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.profilepb.TabIndex = 0;
             this.profilepb.TabStop = false;
             // 

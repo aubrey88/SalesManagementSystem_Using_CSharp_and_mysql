@@ -97,41 +97,48 @@ namespace DB2_PROJECT
 
         private void datav1_SelectionChanged(object sender, EventArgs e)
         {
-            if (datav1.SelectedRows.Count > 0)
+            try
             {
-                //select row to display it
-                DataGridViewRow selectedRow = datav1.SelectedRows[0];
-
-
-                customeridtb.Text = selectedRow.Cells["Customer ID"].Value.ToString();
-                useridtb.Text = selectedRow.Cells["User ID"].Value.ToString();
-                usernametb.Text = selectedRow.Cells["Username"].Value.ToString();
-                firstnametb.Text = selectedRow.Cells["First Name"].Value.ToString();
-                lastnametb.Text = selectedRow.Cells["Last Name"].Value.ToString();
-                gendertb.Text = selectedRow.Cells["Gender"].Value.ToString();
-                emailtb.Text = selectedRow.Cells["Email"].Value.ToString();
-
-                datecreatedtb.Text = selectedRow.Cells["Date created"].Value.ToString();
-                addresstb.Text = selectedRow.Cells["Address"].Value.ToString();
-                phonenumbertb.Text = selectedRow.Cells["Phone number"].Value.ToString();
-                dobtb.Text = selectedRow.Cells["Date of Birth"].Value.ToString();
-
-
-
-
-                if (selectedRow.Cells["Image"].Value != DBNull.Value)
+                if (datav1.SelectedRows.Count > 0)
                 {
-                    //get the image row 
-                    byte[] imageData = (byte[])selectedRow.Cells["Image"].Value;
-                    using (MemoryStream ms = new MemoryStream(imageData))
+                    //select row to display it
+                    DataGridViewRow selectedRow = datav1.SelectedRows[0];
+
+
+                    customeridtb.Text = selectedRow.Cells["Customer ID"].Value.ToString();
+                    useridtb.Text = selectedRow.Cells["User ID"].Value.ToString();
+                    usernametb.Text = selectedRow.Cells["Username"].Value.ToString();
+                    firstnametb.Text = selectedRow.Cells["First Name"].Value.ToString();
+                    lastnametb.Text = selectedRow.Cells["Last Name"].Value.ToString();
+                    gendertb.Text = selectedRow.Cells["Gender"].Value.ToString();
+                    emailtb.Text = selectedRow.Cells["Email"].Value.ToString();
+
+                    datecreatedtb.Text = selectedRow.Cells["Date created"].Value.ToString();
+                    addresstb.Text = selectedRow.Cells["Address"].Value.ToString();
+                    phonenumbertb.Text = selectedRow.Cells["Phone number"].Value.ToString();
+                    dobtb.Text = selectedRow.Cells["Date of Birth"].Value.ToString();
+
+
+
+
+                    if (selectedRow.Cells["Image"].Value != DBNull.Value)
                     {
-                        customerimagepb.Image = Image.FromStream(ms);
+                        //get the image row 
+                        byte[] imageData = (byte[])selectedRow.Cells["Image"].Value;
+                        using (MemoryStream ms = new MemoryStream(imageData))
+                        {
+                            customerimagepb.Image = Image.FromStream(ms);
+                        }
+                    }
+                    else
+                    {
+                        customerimagepb.Image = null;
                     }
                 }
-                else
-                {
-                    customerimagepb.Image = null;
-                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -207,6 +214,100 @@ namespace DB2_PROJECT
         private void viewCustomers_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void viewcustomerorderbtn_Click(object sender, EventArgs e)
+        {
+            string username = usernametb.Text;
+            orders cusorders = new orders(username);
+            cusorders.Show();
+
+        }
+
+        private void searchbtn_Click(object sender, EventArgs e)
+        {
+            string keyword = searchtb.Text.Trim();
+
+
+            string my_sql_connection = "server=127.0.0.1; user=iam; database=sales_management; password=EL@oVJF]zQFk(6[E";
+
+            try
+            {
+                using (MySqlConnection MySqlConnection = new MySqlConnection(my_sql_connection))
+                {
+                    MySqlConnection.Open();
+                    string query = @"select c.customer_id as 'Customer ID', u.user_id as 'User ID', u.username as 'Username', u.first_name as 'First Name', u.last_name as 'Last Name', u.gender as 'Gender',u.date_of_birth as 'Date of Birth',u.date_created as 'Date created' ,u.address as 'Address',u.email as 'Email',u.phone_number as 'Phone number', u.profileimage as Image FROM customer c join users u on c.user_id=u.user_id  where lower(u.first_name) LIKE (lower(@keyword))";
+
+
+                    using (MySqlCommand sqlCommand = new MySqlCommand(query, MySqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                        DataTable table = new DataTable();
+
+                        using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            table.Load(reader);
+                        }
+                        datav1.DataSource = table;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error searching for Customer: " + ex.Message);
+            }
+        }
+
+        private void searchtb_TextChanged(object sender, EventArgs e)
+        {
+            string a = searchtb.Text.ToString();
+            if (searchtb.Text == "")
+            {
+                LoadData();
+            }
+        }
+
+        private void sortcmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //sorting it by using column names to match the cases(string)
+            string selectedoption = sortcmb.SelectedItem.ToString();
+
+
+            try
+            {
+                switch (selectedoption)
+                {         case "Customer ID":
+                        datav1.Sort(datav1.Columns["Customer ID"], ListSortDirection.Ascending);
+                        break;
+                    case "User ID":
+                        datav1.Sort(datav1.Columns["User ID"], ListSortDirection.Ascending);
+                        break;
+                    case "First Name":
+                        datav1.Sort(datav1.Columns["First Name"], ListSortDirection.Ascending);
+                        break;
+                    case "Last Name":
+                        datav1.Sort(datav1.Columns["Last Name"], ListSortDirection.Ascending);
+                        break;
+                    case "Gender":
+                        datav1.Sort(datav1.Columns["Gender"], ListSortDirection.Ascending);
+                        break;
+                    case "Email":
+                        datav1.Sort(datav1.Columns["Email"], ListSortDirection.Ascending);
+                        break;
+                 case "Address":
+                        datav1.Sort(datav1.Columns["Address"], ListSortDirection.Ascending);
+                break;
+                default:
+
+                        datav1.Sort(datav1.Columns["Customer ID"], ListSortDirection.Ascending);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nSearch box must be cleared!");
+            }
         }
     }
 }

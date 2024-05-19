@@ -56,7 +56,8 @@ namespace DB2_PROJECT
                     bool isAdmin = false;
                     bool isSupplier = false;
 
-                    MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username and role = lower('customer')", MySqlConnection);
+                    MySqlCommand userCommand = new MySqlCommand("SELECT * FROM users " +
+                        "WHERE username = @username and role = lower('customer')", MySqlConnection);
                     userCommand.Parameters.AddWithValue("@username", username);
                     MySqlDataReader userReader = userCommand.ExecuteReader();
 
@@ -87,7 +88,8 @@ namespace DB2_PROJECT
                     }
                     if (!loginSuccessful && !isAdmin)
                     {
-                        MySqlCommand supplierCommand = new MySqlCommand("SELECT * FROM users WHERE username = @username AND role = 'supplier'", MySqlConnection);
+                        MySqlCommand supplierCommand = new MySqlCommand("SELECT * FROM users " +
+                            "WHERE username = @username AND role = 'supplier'", MySqlConnection);
                         supplierCommand.Parameters.AddWithValue("@username", username);
                         MySqlDataReader supplierReader = supplierCommand.ExecuteReader();
 

@@ -242,6 +242,7 @@ namespace DB2_PROJECT
             this.Name = "editform";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "editform";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.editform_FormClosing);
             this.Load += new System.EventHandler(this.editform_Load);
             this.editpanel.ResumeLayout(false);
             this.editpanel.PerformLayout();

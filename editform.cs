@@ -142,7 +142,7 @@ namespace DB2_PROJECT
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("User profile updated successfully!");
-                        this.Close();
+                        this.Hide();
                         Dashboard dc = new Dashboard(loggedInUsername);
                         dc.Show();
                     }
@@ -203,6 +203,12 @@ namespace DB2_PROJECT
                     MessageBox.Show(ex.Message);
                 }
             }
+        }
+
+        private void editform_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Dashboard dc = new Dashboard(loggedInUsername);
+            dc.Show();
         }
     }
 

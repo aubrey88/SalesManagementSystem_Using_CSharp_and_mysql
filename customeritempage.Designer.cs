@@ -34,7 +34,9 @@ namespace DB2_PROJECT
             this.sortcmb = new System.Windows.Forms.ComboBox();
             this.datav1 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.itemidtb = new System.Windows.Forms.TextBox();
             this.orderitembtn = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.categoryidtb = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,8 +55,6 @@ namespace DB2_PROJECT
             this.searchtb = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.searchbtn = new System.Windows.Forms.Button();
-            this.itemidtb = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.datav1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemimagepb)).BeginInit();
@@ -134,6 +134,13 @@ namespace DB2_PROJECT
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
+            // itemidtb
+            // 
+            this.itemidtb.Location = new System.Drawing.Point(21, 76);
+            this.itemidtb.Name = "itemidtb";
+            this.itemidtb.Size = new System.Drawing.Size(175, 23);
+            this.itemidtb.TabIndex = 21;
+            // 
             // orderitembtn
             // 
             this.orderitembtn.BackColor = System.Drawing.Color.Teal;
@@ -146,6 +153,16 @@ namespace DB2_PROJECT
             this.orderitembtn.Text = "Order item";
             this.orderitembtn.UseVisualStyleBackColor = false;
             this.orderitembtn.Click += new System.EventHandler(this.orderitembtn_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(21, 41);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 21);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Item ID";
             // 
             // categoryidtb
             // 
@@ -315,23 +332,6 @@ namespace DB2_PROJECT
             this.searchbtn.UseVisualStyleBackColor = true;
             this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
             // 
-            // itemidtb
-            // 
-            this.itemidtb.Location = new System.Drawing.Point(21, 76);
-            this.itemidtb.Name = "itemidtb";
-            this.itemidtb.Size = new System.Drawing.Size(175, 23);
-            this.itemidtb.TabIndex = 21;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(21, 41);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 21);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Item ID";
-            // 
             // customeritempage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -343,7 +343,9 @@ namespace DB2_PROJECT
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.searchbtn);
             this.Name = "customeritempage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "customeritempage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.customeritempage_FormClosing);
             this.Load += new System.EventHandler(this.customeritempage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datav1)).EndInit();
             this.groupBox2.ResumeLayout(false);

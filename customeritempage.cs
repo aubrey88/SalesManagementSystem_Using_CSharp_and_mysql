@@ -344,7 +344,12 @@ namespace DB2_PROJECT
                     MessageBox.Show(ex.Message);
                 }
             }
-        
+
+        private void customeritempage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CustomerForm cff = new CustomerForm(loggedInUsername);
+            cff.Show();
+        }
     }
 
    
