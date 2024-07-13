@@ -180,12 +180,12 @@ namespace DB2_PROJECT
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com"); 
                 smtpClient.Port = 587;
                 smtpClient.UseDefaultCredentials = false;
-
-                smtpClient.Credentials = new NetworkCredential("tcsharp267@gmail.com", "testcsharp2024databaseprojectpassword"); 
+//this is where i said in the readme file to change to your email and password
+                smtpClient.Credentials = new NetworkCredential("youremail", "password"); 
                 smtpClient.EnableSsl = true;
 
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("tcsharp267@gmail.com");
+                mailMessage.From = new MailAddress("youremail");
                 mailMessage.To.Add(email);
                 mailMessage.Subject = "Your Verification Code";
                 mailMessage.Body = "Your verification code is: " + code;
